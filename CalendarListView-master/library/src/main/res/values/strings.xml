@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Library</string>
+    <!-- pull to refresh listview -->
+    <string name="pulldown_refreshing">Refreshing...</string>
+    <string name="pulldown_pull">Pull</string>
+    <string name="pulldown_release">Release</string>
+    <string name="today">Today</string>
+    <string-array name="week">
+        <item>SUN</item>
+        <item>MON</item>
+        <item>TUE</item>
+        <item>WED</item>
+        <item>THU</item>
+        <item>FRI</item>
+        <item>SAT</item>
+    </string-array>
+</resources>

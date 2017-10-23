@@ -1,0 +1,23 @@
+{"2017-02-05":[
+  {"ga_prefix":"022121","images":["action1"],"title":"Send her messages","id":1,"isChecked":false,"type":0},
+  {"ga_prefix":"022116","images":["action2"],"title":"Buy her a gift","id":2,"isChecked":true,"type":0},
+  {"ga_prefix":"022111","images":["action3"],"title":"Tell her stories","id":3,"isChecked":false,"type":0},
+  {"ga_prefix":"022107","images":["action4"],"title":"Help her to do house works","id":4,"isChecked":false,"type":0}
+],
+  "2017-02-08":[
+    {"ga_prefix":"022120","images":["action5"],"title":"Cook a meal for her","id":5,"isChecked":false,"type":0},
+    {"ga_prefix":"022118","images":["action6"],"title":"Take a picture with her","id":6,"isChecked":false,"type":0},
+    {"ga_prefix":"022118","images":["action7"],"title":"Go out with her","id":7,"isChecked":false,"type":0},
+    {"ga_prefix":"022117","images":["action8"],"title":"This is custom action","id":8,"isChecked":false,"type":0}
+  ],
+  "2017-02-13":[
+    {"ga_prefix":"022121","images":["action1"],"title":"Send her messages","id":1,"isChecked":false,"type":0},
+    {"ga_prefix":"022116","images":["action2"],"title":"Buy her a gift","id":2,"isChecked":true,"type":0},
+    {"ga_prefix":"022111","images":["action3"],"title":"Tell her stories","id":3,"isChecked":false,"type":0},
+    {"ga_prefix":"022107","images":["action4"],"title":"Help her to do house works","id":4,"isChecked":false,"type":0},
+    {"ga_prefix":"022120","images":["action8"],"title":"Cook a meal for her","id":8,"isChecked":false,"type":0},
+    {"ga_prefix":"022118","images":["action6"],"title":"Go out with her","id":6,"isChecked":false,"type":0},
+    {"ga_prefix":"022118","images":["action7"],"title":"Take a picture with her","id":7,"isChecked":false,"type":0},
+    {"ga_prefix":"022117","images":["action8"],"title":"This is custom action","id":8,"isChecked":false,"type":0}
+  ]
+}

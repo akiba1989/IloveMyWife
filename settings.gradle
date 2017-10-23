@@ -1,0 +1,2 @@
+include ':app', ':library', ':core'
+project(':library').projectDir = new File('CalendarListView-master/library')
