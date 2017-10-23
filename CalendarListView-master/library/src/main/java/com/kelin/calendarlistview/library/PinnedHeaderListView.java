@@ -374,6 +374,7 @@ public class PinnedHeaderListView extends ListView implements OnScrollListener {
         mLoadingFooter.setState(LoadingFooter.State.Idle);
 
         addFooterView(mLoadingFooter.getView());
+//        addView(mLoadingFooter.getView(),2);
         mLoadingHeader = new LoadingFooter(context);
         //set header invi
 //        mLoadingHeader.getView().setVisibility(GONE);

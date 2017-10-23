@@ -10,6 +10,8 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.Random;
+
 
 public class LoadingFooter {
     protected View mLoadingFooter;
@@ -38,7 +40,11 @@ public class LoadingFooter {
         mLoadingText = (TextView) mLoadingFooter
                 .findViewById(R.id.text_loading);
         mLoadingFooter.setVisibility(View.GONE);
-        mLoadingText.setText("This is tips");
+
+        Random RAND = new Random();
+        String[] values = context.getResources().getStringArray(R.array.tips_array);
+        String nextValue = values[RAND.nextInt(values.length)];
+        mLoadingText.setText(nextValue);
     }
 
     protected void init(String noMoreDataMessage, int loadingTextColor) {

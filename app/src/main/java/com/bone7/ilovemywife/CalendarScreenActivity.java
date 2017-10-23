@@ -6,8 +6,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 //import com.bone7.ilovemywife.retrofit.RetrofitProvider;
 import com.google.gson.Gson;
@@ -58,14 +61,24 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
         setContentView(R.layout.activity_calendar_screen);
 
         final PinnedHeaderListView lv  = (PinnedHeaderListView) findViewById(R.id.listview);
-
+        boolean wrapInScrollView = true;
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
-                .title("test")
-                .content("Test content")
+                .title("Add your action")
+                .customView(R.layout.add_new_action,wrapInScrollView)
                 .positiveText("Agree")
                 .negativeText("Cancel");
 
         final MaterialDialog dialog = builder.build();
+
+
+        final View actionCustomview = dialog.getCustomView();
+        final Spinner spinner = (Spinner)actionCustomview.findViewById(R.id.spinner);
+        final EditText editText = (EditText)actionCustomview.findViewById(R.id.editText);
+        int flags[] = {R.mipmap.action8,R.mipmap.action1, R.mipmap.action2,R.mipmap.action3,R.mipmap.action4,R.mipmap.action5,R.mipmap.action6,R.mipmap.action7};
+        MySpinnerAdapter mySpinnerAdapter = new MySpinnerAdapter(getApplicationContext(),flags);
+        spinner.setAdapter(mySpinnerAdapter);
+
+
         final ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -78,6 +91,27 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
 
             }
         });
+
+        View positive = dialog.getActionButton(DialogAction.POSITIVE);
+        positive.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String action="";
+                NewsService.News.StoriesBean story;
+                if(spinner.getSelectedItemPosition() > 0) {
+                    action = "action" + spinner.getSelectedItemPosition();
+                    story = new NewsService.News.StoriesBean(editText.getText().toString(),action,spinner.getSelectedItemPosition(),true);
+                }
+                else
+                    story = new NewsService.News.StoriesBean(editText.getText().toString(),"action8",8,true);
+                listTreeMap.get(calendarListView.getCurrentSelectedDate()).add(story);
+                Collections.sort(listTreeMap.get(calendarListView.getCurrentSelectedDate()), new MyAndroidHelper.ActionComparator());
+                dayNewsListAdapter.notifyDataSetChanged();
+                dialog.dismiss();
+//                Toast.makeText(getApplicationContext(),"Clicked",Toast.LENGTH_LONG);
+            }
+        });
+
         calendarItemAdapter = new CalendarItemAdapter(this);
         dayNewsListAdapter = new DayNewsListAdapter(this);
 
@@ -99,8 +133,8 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
 
         // set start time,just for test.
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MONTH, -7);
-        loadNewsList(TREEMAP_FORMAT.format(calendar.getTime()));
+//        calendar.add(Calendar.MONTH, -7);
+        loadNewsList(TREEMAP_FORMAT.format(calendar.getTime()).substring(0,7));
         loadDayList(TREEMAP_FORMAT.format(calendar.getTime()));
         actionBar.setTitle(YEAR_MONTH_FORMAT.format(calendar.getTime()));
 
@@ -150,7 +184,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
 //                Calendar calendar = getCalendarByYearMonthDay(selectedDate);
                 loadDayList(selectedDate);
 //                String tremp = MyAndroidHelper.readFromFile(selectedDate.substring(0,7),getApplicationContext());
-//                Log.i("test2", tremp);
+                Log.i("test3", selectedDate.substring(0,7));
             }
         });
     }
@@ -164,7 +198,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
     // load list by month
     private void loadNewsList(String date) {
         Calendar calendar = getCalendarByYearMonthDay(date);
-        String key = CalendarHelper.YEAR_MONTH_FORMAT.format(calendar.getTime());
+//        String key = CalendarHelper.YEAR_MONTH_FORMAT.format(calendar.getTime());
 
         // just not care about how data to create.
 //        Random random = new Random();
@@ -189,7 +223,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
         String json =  MyAndroidHelper.readFromFile(date,getApplicationContext());
         if(json.length() > 0)
             listTreeMap = (TreeMap<String, List<NewsService.News.StoriesBean>>) gson.fromJson(json, listType);
-        Log.i("test2",date);
+        Log.i("test5",date);
 
     }
     private void loadDayList(String date) {
@@ -207,7 +241,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
             tempActions.add(new NewsService.News.StoriesBean("Cook a meal for her","action5",5,false));
             tempActions.add(new NewsService.News.StoriesBean("Take a picture with her","action6",6,false));
             tempActions.add(new NewsService.News.StoriesBean("Go out with her","action7",7,false));
-            tempActions.add(new NewsService.News.StoriesBean("This is custom action","action8",8,false));
+//            tempActions.add(new NewsService.News.StoriesBean("This is custom action","action8",8,false));
             listTreeMap.put(date,tempActions);
 //            currentTreeMap.put(date,listTreeMap.firstEntry().getValue());
             currentTreeMap.put(date,listTreeMap.get(date));

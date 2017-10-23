@@ -14,4 +14,16 @@
         <item>FRI</item>
         <item>SAT</item>
     </string-array>
+    <string-array name="tips_array">
+        <item>Tip: Do extend your hugs and kisses longer than you normally would. You\'ll feel a new sense of connection...Click to read more</item>
+        <item>Tip: Take a walk together. The very act of walking in the same direction can help you two feel as though you\'re on the same team and want the same result...Click to read more</item>
+        <item>Tip: Set your alarm 10 minutes before you need to get up to spend some quality time with your spouse. Those precious 10 minutes of alone time in the morning will set the tone for your day...Click to read more</item>
+        <item>Tip: Take a moment to hug each other in public, even if it\'s in the middle of the pasta aisle at the store...Click to read more</item>
+        <item>Tip: Taking a shower with your loved one is a great idea...Click to read more</item>
+        <item>Tip: Reading for just 10 minutes per day with your spouse will increase communication and help you form a deeper bond...Click to read more</item>
+        <item>Tip: Make it a goal to ask your spouse daily how they\'re doing and if they need anything from you.</item>
+        <item>Tip: Play games together. Make it a priority to continue having fun with your spouse...Click to read more</item>
+        <item>Tip: Say \"I love you\". Write it on your bathroom mirror, call her, text her or even post it on her Facebook wall - let\'s do it...Click to read more</item>
+        <item>Tip: Is today a beautiful day with your wife and you find this application useful? Support its development by sending a donation to the developer...Click to donate</item>
+    </string-array>
 </resources>
