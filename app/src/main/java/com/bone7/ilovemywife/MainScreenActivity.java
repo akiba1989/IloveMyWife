@@ -23,15 +23,17 @@ public class MainScreenActivity extends AppCompatActivity {
     private int mLevel;
     private Button mNextLevelButton;
     private InterstitialAd mInterstitialAd;
-    private TextView mLevelTextView;
+//    private TextView mLevelTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_screen);
+//        setContentView(R.layout.activity_main_screen);
+        setContentView(R.layout.new_main_layout);
 
         // Create the next level button, which tries to show an interstitial when clicked.
-        mNextLevelButton = ((Button) findViewById(R.id.next_level_button));
+//        mNextLevelButton = ((Button) findViewById(R.id.next_level_button));
+        mNextLevelButton = ((Button) findViewById(R.id.calendarBtn));
         mNextLevelButton.setEnabled(false);
         mNextLevelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,8 +43,8 @@ public class MainScreenActivity extends AppCompatActivity {
         });
 
         // Create the text view to show the level number.
-        mLevelTextView = (TextView) findViewById(R.id.level);
-        mLevel = START_LEVEL;
+//        mLevelTextView = (TextView) findViewById(R.id.level);
+//        mLevel = START_LEVEL;
 
         // Create the InterstitialAd and set the adUnitId (defined in values/strings.xml).
         mInterstitialAd = newInterstitialAd();
@@ -117,7 +119,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
     private void goToNextLevel() {
         // Show the next level and reload the ad to prepare for the level after.
-        mLevelTextView.setText("Level " + (++mLevel));
+//        mLevelTextView.setText("Level " + (++mLevel));
         mInterstitialAd = newInterstitialAd();
         loadInterstitial();
         Intent intent = new Intent(this, CalendarScreenActivity.class);
