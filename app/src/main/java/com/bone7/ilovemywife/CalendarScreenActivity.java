@@ -1,13 +1,21 @@
 package com.bone7.ilovemywife;
 
+import android.content.Context;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -38,7 +46,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
     public static final SimpleDateFormat TREEMAP_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     public static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("yyyyMMdd");
     public static final SimpleDateFormat YEAR_MONTH_FORMAT = new SimpleDateFormat("yyyy.MM");
-    //public final ActionBar actionBar;
+    public ActionBar actionBar;
 
     private CalendarListView calendarListView;
     private DayNewsListAdapter dayNewsListAdapter;
@@ -53,12 +61,16 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
     public List<NewsService.News.StoriesBean> tempActions;
     Gson gson = new Gson();
 
+    ImageButton btnPre, btnNext;
+    TextView txtMonth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_calendar_screen);
+
 
         final PinnedHeaderListView lv  = (PinnedHeaderListView) findViewById(R.id.listview);
         boolean wrapInScrollView = true;
@@ -78,10 +90,12 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
         MySpinnerAdapter mySpinnerAdapter = new MySpinnerAdapter(getApplicationContext(),flags);
         spinner.setAdapter(mySpinnerAdapter);
 
+        // for old action bar
+//        final ActionBar actionBar = getSupportActionBar();
+//        actionBar.setDisplayShowHomeEnabled(false);
+//        actionBar.setDisplayHomeAsUpEnabled(true);
 
-        final ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayShowHomeEnabled(false);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+
         calendarListView = (CalendarListView) findViewById(R.id.calendar_listview);
         calendarListView.SetAddNewJobBtnClickListener(new View.OnClickListener() {
             @Override
@@ -133,10 +147,16 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
 
         // set start time,just for test.
         Calendar calendar = Calendar.getInstance();
+
 //        calendar.add(Calendar.MONTH, -7);
         loadNewsList(TREEMAP_FORMAT.format(calendar.getTime()).substring(0,7));
         loadDayList(TREEMAP_FORMAT.format(calendar.getTime()));
-        actionBar.setTitle(YEAR_MONTH_FORMAT.format(calendar.getTime()));
+
+        showActionBar();
+
+//        actionBar.setTitle(YEAR_MONTH_FORMAT.format(calendar.getTime()));
+        txtMonth.setText(YEAR_MONTH_FORMAT.format(calendar.getTime()));
+
 
         // deal with refresh and load more event.
         calendarListView.setOnListPullListener(new CalendarListView.onListPullListener() {
@@ -195,6 +215,54 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
         MyAndroidHelper.writeToFile(calendarListView.getCurrentSelectedDate().substring(0,7), gson.toJson(listTreeMap),getApplicationContext());
 
     }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_calendar_screen, menu);
+//        btnPre = menu.findItem(R.id.action_pre);
+//        btnNext = menu.findItem(R.id.action_next);
+//        txtMonth= menu.findItem(R.id.action_month);
+//        return true;
+//    }
+    private void showActionBar() {
+        LayoutInflater inflator = (LayoutInflater) this
+                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.actionbar_calendar_screen_layout, null);
+        actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowHomeEnabled (false);
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setCustomView(v);
+        btnPre = v.findViewById(R.id.action_pre);
+        btnNext = v.findViewById(R.id.action_next);
+        txtMonth= v.findViewById(R.id.action_month);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // action with ID action_refresh was selected
+            case R.id.action_pre:
+                Toast.makeText(this, "Refresh selected", Toast.LENGTH_SHORT)
+                        .show();
+                txtMonth.setText("left btn, 2017");
+                calendarListView.changeMonth(-1);
+
+                break;
+            // action with ID action_settings was selected
+            case R.id.action_next:
+                Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
+                        .show();
+                txtMonth.setText("tight btn, 2017");
+                calendarListView.changeMonth(1);
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
+
     // load list by month
     private void loadNewsList(String date) {
         Calendar calendar = getCalendarByYearMonthDay(date);
@@ -331,6 +399,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
         }
         return calendar;
     }
+
 
 
 }

@@ -32,7 +32,8 @@
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:theme="@android:style/Theme.Translucent" />
-        <activity android:name=".CalendarScreenActivity"></activity>
+        <activity android:name=".CalendarScreenActivity"
+            android:label=""></activity>
     </application>
 
 </manifest>
