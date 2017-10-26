@@ -2,6 +2,8 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary2">#0072FF</color>
+    <color name="colorPrimaryDark2">#0066E6</color>
     <color name="colorAccent">#FF4081</color>
     <color name="Bg_Calendar_ListView_Header">#e9e9e9</color>
     <color name="gray_eeeeee">#eeeeee</color>
@@ -10,4 +12,6 @@
     <color name="red_ff725f">#ff725f</color>
     <color name="calendar_week_bg_color">#F2F2F2</color>
     <color name="black_80000000">#80000000</color>
+    <color name="dark">#252A30</color>
+    <color name="dark2">#3D464B</color>
 </resources>

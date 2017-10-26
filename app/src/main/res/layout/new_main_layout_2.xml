@@ -9,41 +9,50 @@
         android:id="@+id/userProfile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+
+
+        android:background="@color/colorPrimary">
         <LinearLayout
             android:id="@+id/section1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp">
 
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_margin="5dp"
-                app:srcCompat="@mipmap/ic_phone" />
+                app:srcCompat="@mipmap/user1" />
 
         </LinearLayout>
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp">
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:layout_gravity="center"
                 android:layout_margin="7dp"
                 android:layout_toLeftOf="@+id/rankingArea"
-                android:layout_alignParentLeft="true">
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Beginner"
                     android:textSize="30dp"
+                    android:textColor="#FAFAFA"
                     android:layout_gravity="center_vertical"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Relax, you're doing fine!"
+                    android:textColor="#FAFAFA"
                     android:layout_gravity="center_vertical"/>
             </LinearLayout>
             <LinearLayout
@@ -54,14 +63,16 @@
                 android:layout_centerInParent="true"
                 android:layout_marginRight="5dp"
                 android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    app:srcCompat="@android:drawable/ic_input_add" />
+                    app:srcCompat="@mipmap/star" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="150"
+                    android:textColor="#FAFAFA"
                     android:layout_gravity="center"
                     />
 
@@ -72,12 +83,14 @@
 
     </LinearLayout>
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="3dp"
-        android:background="@color/Bg_Calendar_ListView_Header">
+        android:background="@drawable/layout_bg"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <TextView
             android:id="@+id/header_day"
@@ -88,7 +101,7 @@
             android:textColor="@color/colorPrimary"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:text="05" />
+            android:text="22" />
 
         <View
             android:layout_width="2px"
@@ -104,7 +117,7 @@
             android:layout_marginLeft="10dp"
             android:textColor="#333333"
             android:textSize="20sp"
-            android:text="2016.07" />
+            android:text="Sep" />
 
 
         <LinearLayout
@@ -114,12 +127,13 @@
             android:gravity="center|center_vertical">
 
             <TextView
-                android:id="@+id/header_btn_fav"
+                android:id="@+id/txt_next_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="8dp"
                 android:text="Your next job"
+                android:textColor="#333333"
                  />
         </LinearLayout>
 
@@ -130,8 +144,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="3dp"
-        android:background="@color/Bg_Calendar_ListView_Header"
-        android:layout_marginTop="3dp">
+        android:background="@drawable/layout_bg"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <TextView
             android:id="@+id/header_day1"
@@ -158,7 +174,7 @@
             android:layout_marginLeft="10dp"
             android:textColor="#333333"
             android:textSize="20sp"
-            android:text="2016.07" />
+            android:text="Aug" />
 
 
         <LinearLayout
@@ -168,65 +184,107 @@
             android:gravity="center|center_vertical">
 
             <TextView
-                android:id="@+id/header_btn_fav1"
+                android:id="@+id/txt_next_event1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="8dp"
                 android:text="Your next job"
+                android:textColor="#333333"
                 />
         </LinearLayout>
 
     </LinearLayout>
     <LinearLayout
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
+        >
 
 
-    <Button
-        android:id="@+id/calendarBtn"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="CALENDAR"
-
-        android:layout_weight="1"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:gravity="center"
         android:layout_gravity="center"
-        android:layout_weight="1">
+        android:layout_weight="7"
+        android:weightSum="1.1"
+        android:background="@drawable/layout_bg">
         <TextView
+            android:id="@+id/txtTip"
+            android:layout_width="0px"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Today's tip: check your action regularly."
+            android:layout_weight="1"
+            android:textStyle="italic"
+            android:textColor="#333333"/>
+    </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Today's tip: check your action regularly."/>
-    </RelativeLayout>
-    <Button
-        android:id="@+id/btnAddAction"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="View all Tips"
-        android:layout_weight="1"
+            android:layout_weight="1"
+            android:weightSum="1.1"
+            android:gravity="center_horizontal">
+            <Button
+                android:id="@+id/calendarBtn"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:text="CALENDAR"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:weightSum="1.1"
+            android:gravity="center_horizontal"
+            >
+            <Button
+                android:id="@+id/btnViewTips"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:text="View all Tips"
+                android:layout_weight="1"
 
-        />
-    <Button
-        android:id="@+id/btnConfig"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="CONFIGURATION"
-        android:layout_weight="1"
-        />
-    <Button
-        android:id="@+id/btnAbout"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:text="ABOUT"
-        android:layout_weight="1"
-        />
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:weightSum="1.1"
+            android:gravity="center_horizontal"
+            >
+            <Button
+                android:id="@+id/btnConfig"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:text="SETTINGS"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:weightSum="1.1"
+            android:gravity="center_horizontal">
+            <Button
+                android:id="@+id/btnAbout"
+                android:layout_width="0px"
+                android:layout_height="match_parent"
+                android:text="ABOUT"
+                android:layout_weight="1"
+                />
+        </LinearLayout>
     </LinearLayout>
 
 

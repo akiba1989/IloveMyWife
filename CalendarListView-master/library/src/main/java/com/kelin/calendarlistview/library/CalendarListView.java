@@ -208,7 +208,7 @@ public class CalendarListView extends FrameLayout {
         });
     }
 
-    protected void changeMonth(int diffMonth) {
+    public void changeMonth(int diffMonth) {
         if (diffMonth != 0) {
             calendarView.changeMonth(diffMonth, currentSelectedDate, status);
         } else {

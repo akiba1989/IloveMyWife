@@ -1,0 +1,22 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.bone7.ilovemywife.MainScreenActivity">
+    <item
+        android:id="@+id/action_pre"
+        android:icon="@mipmap/preicon"
+        android:orderInCategory="100"
+        android:title="Next"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_month"
+        android:orderInCategory="100"
+        android:title="Oct, 2017"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_next"
+        android:icon="@mipmap/nexticon"
+        android:orderInCategory="100"
+        android:title="Previous"
+        app:showAsAction="always" />
+</menu>
