@@ -45,7 +45,7 @@ import java.util.TreeMap;
 public class CalendarScreenActivity extends RxAppCompatActivity {
     public static final SimpleDateFormat TREEMAP_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
     public static final SimpleDateFormat DAY_FORMAT = new SimpleDateFormat("yyyyMMdd");
-    public static final SimpleDateFormat YEAR_MONTH_FORMAT = new SimpleDateFormat("yyyy.MM");
+    public static final SimpleDateFormat YEAR_MONTH_FORMAT = new SimpleDateFormat("MMM-yyyy");
     public ActionBar actionBar;
 
     private CalendarListView calendarListView;
@@ -61,9 +61,8 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
     public List<NewsService.News.StoriesBean> tempActions;
     Gson gson = new Gson();
 
-    ImageButton btnPre, btnNext;
-    TextView txtMonth;
-
+    MenuItem btnPre, btnNext, txtMonth;
+//    ImageButton btnPre, btnNext; TextView txtMonth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,10 +151,10 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
         loadNewsList(TREEMAP_FORMAT.format(calendar.getTime()).substring(0,7));
         loadDayList(TREEMAP_FORMAT.format(calendar.getTime()));
 
-        showActionBar();
+//        showActionBar();
 
 //        actionBar.setTitle(YEAR_MONTH_FORMAT.format(calendar.getTime()));
-        txtMonth.setText(YEAR_MONTH_FORMAT.format(calendar.getTime()));
+//        txtMonth.setText(YEAR_MONTH_FORMAT.format(calendar.getTime()));
 
 
         // deal with refresh and load more event.
@@ -187,7 +186,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
             public void onMonthChanged(String yearMonth) {
                 Calendar calendar = CalendarHelper.getCalendarByYearMonth(yearMonth);
 //                calendar.set(Calendar.DAY_OF_MONTH, 1);
-                actionBar.setTitle(YEAR_MONTH_FORMAT.format(calendar.getTime()));
+//                actionBar.setTitle(YEAR_MONTH_FORMAT.format(calendar.getTime()));
                 loadNewsList(yearMonth.substring(0,7));
                 loadCalendarData(yearMonth);
                 Toast.makeText(CalendarScreenActivity.this, YEAR_MONTH_FORMAT.format(calendar.getTime()), Toast.LENGTH_SHORT).show();
@@ -215,37 +214,43 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
         MyAndroidHelper.writeToFile(calendarListView.getCurrentSelectedDate().substring(0,7), gson.toJson(listTreeMap),getApplicationContext());
 
     }
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        MenuInflater inflater = getMenuInflater();
-//        inflater.inflate(R.menu.menu_calendar_screen, menu);
-//        btnPre = menu.findItem(R.id.action_pre);
-//        btnNext = menu.findItem(R.id.action_next);
-//        txtMonth= menu.findItem(R.id.action_month);
-//        return true;
-//    }
-    private void showActionBar() {
-        LayoutInflater inflator = (LayoutInflater) this
-                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflator.inflate(R.layout.actionbar_calendar_screen_layout, null);
-        actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(false);
-        actionBar.setDisplayShowHomeEnabled (false);
-        actionBar.setDisplayShowCustomEnabled(true);
-        actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setCustomView(v);
-        btnPre = v.findViewById(R.id.action_pre);
-        btnNext = v.findViewById(R.id.action_next);
-        txtMonth= v.findViewById(R.id.action_month);
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_calendar_screen, menu);
+        btnPre = menu.findItem(R.id.action_pre);
+        btnNext = menu.findItem(R.id.action_next);
+        txtMonth= menu.findItem(R.id.action_month);
+        Calendar calendar = getCalendarByTREEMAP(calendarListView.getCurrentSelectedDate());
+        txtMonth.setTitle(YEAR_MONTH_FORMAT.format(calendar.getTime()));
+        return true;
     }
+//    private void showActionBar() {
+//        LayoutInflater inflator = (LayoutInflater) this
+//                .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View v = inflator.inflate(R.layout.actionbar_calendar_screen_layout, null);
+//        actionBar = getSupportActionBar();
+//        actionBar.setDisplayHomeAsUpEnabled(false);
+//        actionBar.setDisplayShowHomeEnabled (false);
+//        actionBar.setDisplayShowCustomEnabled(true);
+//        actionBar.setDisplayShowTitleEnabled(false);
+//        actionBar.setCustomView(v);
+//        btnPre = v.findViewById(R.id.action_pre);
+//        btnNext = v.findViewById(R.id.action_next);
+//        txtMonth= v.findViewById(R.id.action_month);
+//    }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Calendar calendar = getCalendarByTREEMAP(calendarListView.getCurrentSelectedDate());
         switch (item.getItemId()) {
             // action with ID action_refresh was selected
             case R.id.action_pre:
                 Toast.makeText(this, "Refresh selected", Toast.LENGTH_SHORT)
                         .show();
-                txtMonth.setText("left btn, 2017");
+                calendar.add(Calendar.MONTH, -1);
+                calendarListView.setCurrentSelectedDate(TREEMAP_FORMAT.format(calendar.getTime()));
+                txtMonth.setTitle(YEAR_MONTH_FORMAT.format(calendar.getTime()));
+//                txtMonth.setText(YEAR_MONTH_FORMAT.format(calendar.getTime()));
                 calendarListView.changeMonth(-1);
 
                 break;
@@ -253,7 +258,10 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
             case R.id.action_next:
                 Toast.makeText(this, "Settings selected", Toast.LENGTH_SHORT)
                         .show();
-                txtMonth.setText("tight btn, 2017");
+                calendar.add(Calendar.MONTH, 1);
+                calendarListView.setCurrentSelectedDate(TREEMAP_FORMAT.format(calendar.getTime()));
+                txtMonth.setTitle(YEAR_MONTH_FORMAT.format(calendar.getTime()));
+//                txtMonth.setText(YEAR_MONTH_FORMAT.format(calendar.getTime()));
                 calendarListView.changeMonth(1);
                 break;
             default:
@@ -265,7 +273,6 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
 
     // load list by month
     private void loadNewsList(String date) {
-        Calendar calendar = getCalendarByYearMonthDay(date);
 //        String key = CalendarHelper.YEAR_MONTH_FORMAT.format(calendar.getTime());
 
         // just not care about how data to create.
@@ -394,6 +401,15 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         try {
             calendar.setTimeInMillis(DAY_FORMAT.parse(yearMonthDay).getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return calendar;
+    }
+    public static Calendar getCalendarByTREEMAP(String yearMonthDay) {
+        Calendar calendar = Calendar.getInstance();
+        try {
+            calendar.setTimeInMillis(TREEMAP_FORMAT.parse(yearMonthDay).getTime());
         } catch (ParseException e) {
             e.printStackTrace();
         }

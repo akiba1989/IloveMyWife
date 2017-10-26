@@ -100,6 +100,9 @@ public class CalendarListView extends FrameLayout {
     public String getCurrentSelectedDate() {
         return currentSelectedDate;
     }
+    public void setCurrentSelectedDate(String currentSelectedDate) {
+        this.currentSelectedDate = currentSelectedDate;
+    }
 
     public void setOnMonthChangedListener(OnMonthChangedListener onMonthChangedListener) {
         calendarView.setOnMonthChangedListener(onMonthChangedListener);

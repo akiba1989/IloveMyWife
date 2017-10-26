@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ActionBarWrapper"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,22 +9,27 @@
 
     <ImageButton
         android:id="@+id/btnPre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:src="@mipmap/preicon"
-        android:layout_alignParentLeft="true" />
+        app:srcCompat="@mipmap/preicon" />
 
     <TextView
         android:id="@+id/txtMonth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Aug, 2017"/>
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:text="Aug, 2017"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+
     <ImageButton
         android:id="@+id/btnNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:src="@mipmap/nexticon"
-        android:layout_alignParentRight="true" />
+        app:srcCompat="@mipmap/nexticon" />
 
-</RelativeLayout>
+</LinearLayout>

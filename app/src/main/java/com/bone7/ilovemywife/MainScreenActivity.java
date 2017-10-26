@@ -29,7 +29,7 @@ public class MainScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        setContentView(R.layout.activity_main_screen);
-        setContentView(R.layout.new_main_layout);
+        setContentView(R.layout.new_main_layout_2);
 
         // Create the next level button, which tries to show an interstitial when clicked.
 //        mNextLevelButton = ((Button) findViewById(R.id.next_level_button));
