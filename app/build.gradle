@@ -11,6 +11,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -27,24 +28,25 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 //    compile 'com.kelin.calendarlistview:library:1.0.1'
-    compile project (':library')
+    compile project(':library')
+
+    // If you want pre-written Activities and Fragments you can subclass as providers
+
+
     compile 'com.afollestad.material-dialogs:core:0.9.4.7'
     compile 'org.apmem.tools:layouts:1.10@aar'
-
-
-
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.google.android.gms:play-services-ads:10.2.4'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    testCompile 'junit:junit:4.12'
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.trello:rxlifecycle:0.5.0'
-    // If you want pre-written Activities and Fragments you can subclass as providers
     compile 'com.trello:rxlifecycle-components:0.5.0'
     compile 'com.squareup.retrofit2:retrofit:2.0.1'
     compile 'com.squareup.retrofit2:converter-gson:2.0.1'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.0.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'me.tatarka:gradle-retrolambda:3.7.0'
-
+    compile 'com.android.support:support-v4:26.+'
+    compile 'com.android.support:support-vector-drawable:26.+'
+    testCompile 'junit:junit:4.12'
 }
