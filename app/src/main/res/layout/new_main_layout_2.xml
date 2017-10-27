@@ -22,8 +22,8 @@
             android:layout_marginLeft="10dp">
 
             <ImageView
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_margin="5dp"
                 app:srcCompat="@mipmap/user1" />
 
@@ -221,74 +221,70 @@
             android:layout_width="0px"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="Today's tip: check your action regularly."
-            android:layout_weight="1"
+            android:text="Today\'s tip: set your alarm 10 minutes before you need to get up to spend some quality time with your spouse. Those precious 10 minutes of alone time in the morning will set the tone for your day."
+            android:layout_weight="1.03"
             android:textStyle="italic"
-            android:textColor="#333333"/>
+            android:textColor="#3b5998"/>
     </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:weightSum="1.1"
-            android:gravity="center_horizontal">
-            <Button
+
+            <mehdi.sakout.fancybuttons.FancyButton
                 android:id="@+id/calendarBtn"
-                android:layout_width="0px"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:text="CALENDAR"
                 android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="5dp"
                 android:layout_gravity="center"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:weightSum="1.1"
-            android:gravity="center_horizontal"
-            >
-            <Button
-                android:id="@+id/btnViewTips"
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:text="View all Tips"
-                android:layout_weight="1"
-
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:weightSum="1.1"
-            android:gravity="center_horizontal"
-            >
-            <Button
-                android:id="@+id/btnConfig"
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:text="SETTINGS"
-                android:layout_weight="1"
-                />
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:weightSum="1.1"
-            android:gravity="center_horizontal">
-            <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/btnAbout"
-                android:layout_width="0px"
-                android:layout_height="match_parent"
-                android:text="ABOUT"
-                android:layout_weight="1"
                 fancy:fb_defaultColor="#3b5998"
                 fancy:fb_focusColor="#5474b8"
                 fancy:fb_radius="5dp"
                 />
-        </LinearLayout>
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/btnViewTips"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="VIEW ALL TIPS"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                fancy:fb_defaultColor="#3b5998"
+                fancy:fb_focusColor="#5474b8"
+                fancy:fb_radius="5dp"
+                />
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/btnConfig"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SETTINGS"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                fancy:fb_defaultColor="#3b5998"
+                fancy:fb_focusColor="#5474b8"
+                fancy:fb_radius="5dp"
+                />
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/btnAbout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ABOUT US"
+                android:layout_weight="1"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                fancy:fb_defaultColor="#FAFAFA"
+                fancy:fb_focusColor="#5474b8"
+                fancy:fb_radius="5dp"
+                fancy:fb_textColor="@android:color/black"
+                />
+
     </LinearLayout>
 
 

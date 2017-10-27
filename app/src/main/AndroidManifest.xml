@@ -35,7 +35,8 @@
         <activity
             android:name=".CalendarScreenActivity"
             android:label="" />
-        <activity android:name=".SettingScreenActivity"></activity>
+        <activity android:name=".SettingScreenActivity"
+            android:label="SETTINGS"></activity>
     </application>
 
 </manifest>

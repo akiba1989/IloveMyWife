@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -12,11 +13,14 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.8">
     </ListView>
-    <Button
+    <mehdi.sakout.fancybuttons.FancyButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add new event"
         android:layout_margin="10dp"
+        fancy:fb_defaultColor="#3b5998"
+        fancy:fb_focusColor="#5474b8"
+        fancy:fb_radius="5dp"
         />
     <RelativeLayout
         android:layout_width="match_parent"
@@ -28,20 +32,42 @@
             android:layout_height="wrap_content"
             android:text="Notifications"
             android:layout_alignParentLeft="true"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/black"/>
         <ToggleButton
             android:id="@+id/toggleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
+            android:checked="true"
             />
     </RelativeLayout>
-    <Button
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Donation"
         android:layout_margin="10dp"
-
+        android:textStyle="italic"
+        android:textColor="@android:color/black"
+        android:text="Is today a beautiful day with your wife and you find this application useful?Support its development by sending a donation to the developer."/>
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="DONATE US"
+        android:layout_margin="10dp"
+        fancy:fb_defaultColor="@color/colorAccent"
+        fancy:fb_focusColor="#5474b8"
+        fancy:fb_radius="30dp"
         />
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Read our privacy"
+        android:layout_margin="10dp"
+        fancy:fb_defaultColor="#FAFAFA"
+        fancy:fb_focusColor="#5474b8"
+        fancy:fb_radius="5dp"
+        fancy:fb_textColor="@android:color/black"
+        />
+
 
 </LinearLayout>
