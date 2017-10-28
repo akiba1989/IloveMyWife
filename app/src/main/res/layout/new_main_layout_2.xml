@@ -66,9 +66,9 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    app:srcCompat="@mipmap/star" />
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    app:srcCompat="@mipmap/heart_main" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -226,9 +226,8 @@
             android:textStyle="italic"
             android:textColor="#3b5998"/>
     </LinearLayout>
-
             <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/calendarBtn"
+                android:id="@+id/btnCalendar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="CALENDAR"
@@ -256,7 +255,7 @@
                 fancy:fb_radius="5dp"
                 />
             <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/btnConfig"
+                android:id="@+id/btnSetting"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="SETTINGS"

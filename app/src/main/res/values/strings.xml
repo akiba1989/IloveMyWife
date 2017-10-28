@@ -85,5 +85,13 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
-
+    <string name="dialog_firsttime_title">Please setup your settings</string>
+    <string name="dialog_firsttime_content">This is first time you run this app, do you want to setup your settings( like your wife/ girl friend birth day, your wedding day, your first met day,..) now? You can setup them anytime in Setting area.</string>
+    <string-array name="event_list">
+        <item>Her birthday</item>
+        <item>Your birthday</item>
+        <item>Your first met</item>
+        <item>Your Wedding</item>
+        <item>Other</item>
+    </string-array>
 </resources>

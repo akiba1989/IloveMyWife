@@ -1,5 +1,7 @@
 package com.bone7.ilovemywife;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -11,7 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainScreenActivity extends AppCompatActivity {
@@ -21,8 +22,10 @@ public class MainScreenActivity extends AppCompatActivity {
 
     private static final int START_LEVEL = 1;
     private int mLevel;
-    private Button mNextLevelButton;
+    private Button btnCalendar, btnSetting, btnViewTips;
     private InterstitialAd mInterstitialAd;
+    public static String myConfig="";
+    Intent intent;
 //    private TextView mLevelTextView;
 
     @Override
@@ -32,19 +35,27 @@ public class MainScreenActivity extends AppCompatActivity {
         setContentView(R.layout.new_main_layout_2);
 
         // Create the next level button, which tries to show an interstitial when clicked.
-//        mNextLevelButton = ((Button) findViewById(R.id.next_level_button));
-        mNextLevelButton = ((Button) findViewById(R.id.calendarBtn));
-        mNextLevelButton.setEnabled(false);
-        mNextLevelButton.setOnClickListener(new View.OnClickListener() {
+//        btnCalendar = ((Button) findViewById(R.id.next_level_button));
+        btnCalendar = ((Button) findViewById(R.id.btnCalendar));
+        btnCalendar.setEnabled(false);
+        btnCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                intent = new Intent(getApplicationContext(), CalendarScreenActivity.class);
                 showInterstitial();
             }
         });
+        btnSetting =(Button) findViewById(R.id.btnSetting);
+        btnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(getApplicationContext(), SettingScreenActivity.class);
+                intent.putExtra("config",myConfig);
+                showInterstitial();
+            }
+        });
+        btnViewTips = (Button) findViewById(R.id.btnViewTips);
 
-        // Create the text view to show the level number.
-//        mLevelTextView = (TextView) findViewById(R.id.level);
-//        mLevel = START_LEVEL;
 
         // Create the InterstitialAd and set the adUnitId (defined in values/strings.xml).
         mInterstitialAd = newInterstitialAd();
@@ -52,6 +63,29 @@ public class MainScreenActivity extends AppCompatActivity {
 
         // Toasts the test ad message on the screen. Remove this after defining your own ad unit ID.
         Toast.makeText(this, TOAST_TEXT, Toast.LENGTH_LONG).show();
+
+        //Check config
+        myConfig = MyAndroidHelper.readFromFile("config", getApplicationContext());
+        if(myConfig.length() < 0)
+        {
+            MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
+                    .title(R.string.dialog_firsttime_title)
+                    .content(R.string.dialog_firsttime_content)
+                    .positiveText("Agree")
+                    .negativeText("No, thanks");
+            final MaterialDialog dialog = builder.build();
+            View positive = dialog.getActionButton(DialogAction.POSITIVE);
+            positive.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    dialog.dismiss();
+                    intent = new Intent(getApplicationContext(), SettingScreenActivity.class);
+                    intent.putExtra("config",myConfig);
+                    startActivity(intent);
+                }
+            });
+            dialog.show();
+        }
     }
 
 
@@ -82,12 +116,12 @@ public class MainScreenActivity extends AppCompatActivity {
         interstitialAd.setAdListener(new AdListener() {
             @Override
             public void onAdLoaded() {
-                mNextLevelButton.setEnabled(true);
+                btnCalendar.setEnabled(true);
             }
 
             @Override
             public void onAdFailedToLoad(int errorCode) {
-                mNextLevelButton.setEnabled(true);
+                btnCalendar.setEnabled(true);
             }
 
             @Override
@@ -111,7 +145,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
     private void loadInterstitial() {
         // Disable the next level button and load the ad.
-        mNextLevelButton.setEnabled(false);
+        btnCalendar.setEnabled(false);
         AdRequest adRequest = new AdRequest.Builder()
                 .setRequestAgent("android_studio:ad_template").build();
         mInterstitialAd.loadAd(adRequest);
@@ -122,7 +156,6 @@ public class MainScreenActivity extends AppCompatActivity {
 //        mLevelTextView.setText("Level " + (++mLevel));
         mInterstitialAd = newInterstitialAd();
         loadInterstitial();
-        Intent intent = new Intent(this, CalendarScreenActivity.class);
         //intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
