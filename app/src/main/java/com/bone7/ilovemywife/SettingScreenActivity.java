@@ -1,10 +1,13 @@
 package com.bone7.ilovemywife;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.afollestad.materialdialogs.DialogAction;
@@ -27,15 +31,20 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 
+import mehdi.sakout.fancybuttons.FancyButton;
+
 public class SettingScreenActivity extends AppCompatActivity {
 
     MyConfigClass appConfig;
     ListView listView;
-    Button btnAddEvent, btnDonate;
+    FancyButton btnAddEvent, btnDonate;
     ToggleButton toggleNotification;
     ArrayList<MyConfigClass.MyEvent> dataModels;
     EventAdapter eventAdapter;
     Gson gson = new Gson();
+    MaterialDialog.Builder builder;
+    MaterialDialog dialog;
+    final Calendar c = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +52,7 @@ public class SettingScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting_screen);
         Intent intent = getIntent();
         String myConfig = intent.getStringExtra("config");
-
+        Log.i("myconfig",myConfig);
         if(myConfig.length() < 2)
         {
             appConfig = new MyConfigClass();
@@ -56,7 +65,7 @@ public class SettingScreenActivity extends AppCompatActivity {
         }
 
         listView = (ListView) findViewById(R.id.listViewEvent);
-        eventAdapter = new EventAdapter(appConfig.eventList, getApplicationContext());
+        eventAdapter = new EventAdapter(appConfig.eventList, SettingScreenActivity.this);
         listView.setAdapter(eventAdapter);
 
         toggleNotification = (ToggleButton) findViewById(R.id.toggleButton);
@@ -69,44 +78,56 @@ public class SettingScreenActivity extends AppCompatActivity {
             }
         });
 
-        btnAddEvent = (Button) findViewById(R.id.btnAddEvent);
+
+        btnAddEvent = (FancyButton) findViewById(R.id.btnAddEvent);
         btnAddEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MaterialDialog.Builder builder = new MaterialDialog.Builder(getApplicationContext())
+                builder = new MaterialDialog.Builder(SettingScreenActivity.this)
                         .title("Add your event")
                         .customView(R.layout.dialog_add_new_event,true)
                         .positiveText("Add")
                         .negativeText("Cancel");
-
-                final MaterialDialog dialog = builder.build();
-
+                dialog = builder.build();
 
                 final View actionCustomview = dialog.getCustomView();
                 final Spinner spinner = (Spinner)actionCustomview.findViewById(R.id.spinner);
                 final EditText editText = (EditText)actionCustomview.findViewById(R.id.editText);
-                final EditText editTextDate = (EditText)actionCustomview.findViewById(R.id.editTextDate);
+                final TextView editTextDate = (TextView)actionCustomview.findViewById(R.id.editTextDate);
                 final Button btnSet = (Button)  actionCustomview.findViewById(R.id.btnSet);
+                editTextDate.setText(CalendarScreenActivity.TREEMAP_FORMAT.format(c.getTime()));
                 String[] eventString = getResources().getStringArray(R.array.event_list);
                 List<String> eventStringList = Arrays.asList(eventString);
-                ArrayAdapter spinnerAdapter = new ArrayAdapter<String>(getApplicationContext(),android.R.layout.simple_spinner_item, eventStringList);
+                ArrayAdapter spinnerAdapter = new ArrayAdapter<String>(getApplicationContext(),R.layout.spinner_item, eventStringList);
                 spinner.setAdapter(spinnerAdapter);
-                spinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
-                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                         if(!spinner.getSelectedItem().toString().equals("Other"))
                             editText.setText(spinner.getSelectedItem().toString());
+                        else
+                            editText.setText("");
+                        editText.requestFocus();
+                        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+                        editText.setSelection(editText.getText().length());
+
+
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
                     }
                 });
                 btnSet.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         int mYear, mMonth, mDay;
-                        final Calendar c = Calendar.getInstance();
                         mYear = c.get(Calendar.YEAR);
                         mMonth = c.get(Calendar.MONTH);
                         mDay = c.get(Calendar.DAY_OF_MONTH);
-                        DatePickerDialog datePickerDialog = new DatePickerDialog(getApplicationContext(),
+                        DatePickerDialog datePickerDialog = new DatePickerDialog(SettingScreenActivity.this,
                                 new DatePickerDialog.OnDateSetListener() {
                                     @Override
                                     public void onDateSet(DatePicker view, int year,
@@ -135,6 +156,7 @@ public class SettingScreenActivity extends AppCompatActivity {
                         MyConfigClass.MyEvent event = new MyConfigClass.MyEvent(editText.getText().toString(), editTextDate.getText().toString());
                         appConfig.eventList.add(event);
                         eventAdapter.notifyDataSetChanged();
+                        dialog.dismiss();
                     }
                 });
                 dialog.show();
@@ -146,7 +168,8 @@ public class SettingScreenActivity extends AppCompatActivity {
 
         super.onPause();
         MyAndroidHelper.writeToFile("config", gson.toJson(appConfig),getApplicationContext());
-
+        Log.i("myconfig",gson.toJson(appConfig));
+        MainScreenActivity.appConfig = appConfig;
     }
 
 }

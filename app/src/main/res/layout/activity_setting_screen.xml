@@ -8,6 +8,10 @@
     tools:context="com.bone7.ilovemywife.SettingScreenActivity"
     android:weightSum="1"
     android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Your event:"/>
     <ListView
         android:id="@+id/listViewEvent"
         android:layout_width="wrap_content"

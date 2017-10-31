@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/ActionBarWrapper"
     android:layout_width="match_parent"
@@ -13,21 +13,28 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="centerCrop"
-        android:src="@mipmap/preicon" />
+        android:src="@mipmap/preicon"
+        android:layout_alignParentLeft="true"
+        android:background="@color/colorPrimary"/>
 
     <TextView
         android:id="@+id/txtMonth"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:text="Aug, 2017"
+        android:text="Aug"
         android:layout_gravity="center"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"/>
 
     <ImageButton
         android:id="@+id/btnNext"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:scaleType="centerCrop"
-        android:src="@mipmap/nexticon" />
+        android:src="@mipmap/nexticon"
+        android:layout_alignParentRight="true"
+        android:background="@color/colorPrimary"/>
 
-</LinearLayout>
+</RelativeLayout>

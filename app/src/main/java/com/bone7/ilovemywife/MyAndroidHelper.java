@@ -35,6 +35,7 @@ public class MyAndroidHelper {
 
                 inputStream.close();
                 ret = stringBuilder.toString();
+
             }
         }
         catch (FileNotFoundException e) {

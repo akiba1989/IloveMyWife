@@ -5,15 +5,23 @@ import com.afollestad.materialdialogs.MaterialDialog;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+
+import mehdi.sakout.fancybuttons.FancyButton;
 
 public class MainScreenActivity extends AppCompatActivity {
     // Remove the below line after defining your own ad unit ID.
@@ -22,10 +30,12 @@ public class MainScreenActivity extends AppCompatActivity {
 
     private static final int START_LEVEL = 1;
     private int mLevel;
-    private Button btnCalendar, btnSetting, btnViewTips;
+    private FancyButton btnCalendar, btnSetting, btnViewTips;
     private InterstitialAd mInterstitialAd;
     public static String myConfig="";
+    public static MyConfigClass appConfig;
     Intent intent;
+    Gson gson = new Gson();
 //    private TextView mLevelTextView;
 
     @Override
@@ -36,7 +46,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
         // Create the next level button, which tries to show an interstitial when clicked.
 //        btnCalendar = ((Button) findViewById(R.id.next_level_button));
-        btnCalendar = ((Button) findViewById(R.id.btnCalendar));
+        btnCalendar = ((FancyButton) findViewById(R.id.btnCalendar));
         btnCalendar.setEnabled(false);
         btnCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,16 +55,17 @@ public class MainScreenActivity extends AppCompatActivity {
                 showInterstitial();
             }
         });
-        btnSetting =(Button) findViewById(R.id.btnSetting);
+        btnSetting =(FancyButton) findViewById(R.id.btnSetting);
         btnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent = new Intent(getApplicationContext(), SettingScreenActivity.class);
-                intent.putExtra("config",myConfig);
+//                intent.putExtra("config",myConfig);
+                intent.putExtra("config",gson.toJson(appConfig));
                 showInterstitial();
             }
         });
-        btnViewTips = (Button) findViewById(R.id.btnViewTips);
+        btnViewTips = (FancyButton) findViewById(R.id.btnViewTips);
 
 
         // Create the InterstitialAd and set the adUnitId (defined in values/strings.xml).
@@ -85,6 +96,16 @@ public class MainScreenActivity extends AppCompatActivity {
                 }
             });
             dialog.show();
+        }
+        if(myConfig.length() < 2)
+        {
+            appConfig = new MyConfigClass();
+            appConfig.notification = true;
+            appConfig.eventList = new ArrayList<>();
+        }else
+        {
+            Type listType = new TypeToken<MyConfigClass>(){}.getType();
+            appConfig = (MyConfigClass) gson.fromJson(myConfig, listType);
         }
     }
 
@@ -158,5 +179,13 @@ public class MainScreenActivity extends AppCompatActivity {
         loadInterstitial();
         //intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
+    }
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+//        myConfig = MyAndroidHelper.readFromFile("config", getApplicationContext());
+//        Log.i("myconfigMain",myConfig);
+
     }
 }
