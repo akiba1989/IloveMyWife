@@ -37,6 +37,7 @@ public class DayNewsListAdapter extends BaseCalendarListAdapter<NewsService.News
             headerViewHolder = new HeaderViewHolder();
             headerViewHolder.dayText = (TextView) convertView.findViewById(R.id.header_day);
             headerViewHolder.yearMonthText = (TextView) convertView.findViewById(R.id.header_year_month);
+            headerViewHolder.eventText = (TextView) convertView.findViewById(R.id.header_event_name);
             headerViewHolder.isFavImage = (ImageView) convertView.findViewById(R.id.header_btn_fav);
             convertView.setTag(headerViewHolder);
         }
@@ -49,6 +50,7 @@ public class DayNewsListAdapter extends BaseCalendarListAdapter<NewsService.News
         }
         headerViewHolder.dayText.setText(dayStr);
         headerViewHolder.yearMonthText.setText(CalendarScreenActivity.YEAR_MONTH_FORMAT.format(calendar.getTime()));
+        headerViewHolder.eventText.setText(MainScreenActivity.appConfig.getEventName(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime())));
         return convertView;
     }
 
@@ -111,6 +113,7 @@ public class DayNewsListAdapter extends BaseCalendarListAdapter<NewsService.News
     private static class HeaderViewHolder {
         TextView dayText;
         TextView yearMonthText;
+        TextView eventText;
         ImageView isFavImage;
     }
 

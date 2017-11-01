@@ -151,7 +151,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
         loadNewsList(TREEMAP_FORMAT.format(calendar.getTime()).substring(0,7));
         loadDayList(TREEMAP_FORMAT.format(calendar.getTime()));
 
-        showActionBar();
+        showActionBar(YEAR_MONTH_FORMAT.format(calendar.getTime()));
 
 //        actionBar.setTitle(YEAR_MONTH_FORMAT.format(calendar.getTime()));
 //        txtMonth.setText(YEAR_MONTH_FORMAT.format(calendar.getTime()));
@@ -225,7 +225,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
 //        txtMonth.setTitle(YEAR_MONTH_FORMAT.format(calendar.getTime()));
 //        return true;
 //    }
-    private void showActionBar() {
+    private void showActionBar(String txtM) {
         LayoutInflater inflator = (LayoutInflater) this
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.actionbar_calendar_screen_layout, null);
@@ -234,10 +234,40 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
         actionBar.setDisplayShowHomeEnabled (false);
         actionBar.setDisplayShowCustomEnabled(true);
         actionBar.setDisplayShowTitleEnabled(false);
-        actionBar.setCustomView(v);
+
+//        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+
         btnPre = v.findViewById(R.id.action_pre);
         btnNext = v.findViewById(R.id.action_next);
         txtMonth= v.findViewById(R.id.action_month);
+        txtMonth.setText(txtM);
+        final Calendar calendar = getCalendarByTREEMAP(calendarListView.getCurrentSelectedDate());
+        btnPre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Toast.makeText(getApplicationContext(), "pre selected", Toast.LENGTH_SHORT)
+                        .show();
+                calendar.add(Calendar.MONTH, -1);
+                calendarListView.setCurrentSelectedDate(TREEMAP_FORMAT.format(calendar.getTime()));
+//                txtMonth.setTitle(YEAR_MONTH_FORMAT.format(calendar.getTime()));
+                txtMonth.setText(YEAR_MONTH_FORMAT.format(calendar.getTime()));
+                calendarListView.changeMonth(-1);
+            }
+        });
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "next selected", Toast.LENGTH_SHORT)
+                        .show();
+                calendar.add(Calendar.MONTH, 1);
+                calendarListView.setCurrentSelectedDate(TREEMAP_FORMAT.format(calendar.getTime()));
+//                txtMonth.setTitle(YEAR_MONTH_FORMAT.format(calendar.getTime()));
+                txtMonth.setText(YEAR_MONTH_FORMAT.format(calendar.getTime()));
+                calendarListView.changeMonth(1);
+            }
+        });
+        actionBar.setCustomView(v);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -329,7 +359,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
             @Override
             public void run() {
                 try {
-                    sleep(500);
+                    sleep(300);
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -350,8 +380,10 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
                                                     newCount++;
                                             }
                                             customCalendarItemModel.setNewsCount(newCount);
-
-                                            customCalendarItemModel.setFav(random.nextBoolean());
+                                            if(MainScreenActivity.appConfig.containDate(date)) {
+                                                customCalendarItemModel.setHoliday(true);
+                                                customCalendarItemModel.setFav(true);
+                                            }
                                             //Get Image list
 //                                            customCalendarItemModel.setListImages(listTreeMap.get(d).getImages());
                                             List<String> imageActions = new ArrayList<>();

@@ -15,6 +15,25 @@ public class MyConfigClass {
         this.notification = notification;
         this.eventList = eventList;
     }
+    public boolean containDate(String date)
+    {
+        for (int i = 0;i<eventList.size();i++)
+        {
+            if(eventList.get(i).eventDate.equals(date))
+                return true;
+        }
+        return false;
+    }
+    public String getEventName (String date)
+    {
+        for (int i = 0;i<eventList.size();i++)
+        {
+            if(eventList.get(i).eventDate.equals(date))
+                return eventList.get(i).eventName;
+        }
+        return "No event today";
+    }
+
     public MyConfigClass(){};
     public static class MyEvent
     {

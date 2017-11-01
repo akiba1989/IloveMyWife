@@ -7,34 +7,43 @@
     android:layout_gravity="center"
     android:orientation="horizontal"
     android:gravity="center">
-
-    <ImageButton
-        android:id="@+id/btnPre"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/preicon"
-        android:layout_alignParentLeft="true"
-        android:background="@color/colorPrimary"/>
-
-    <TextView
-        android:id="@+id/txtMonth"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="Aug"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:layout_centerInParent="true"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"/>
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+        <ImageButton
+            android:id="@+id/btnPre"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_media_play"
+            android:layout_alignParentLeft="true"
+            android:background="@color/colorPrimary"
+            android:rotation="180"
+            />
 
-    <ImageButton
-        android:id="@+id/btnNext"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="centerCrop"
-        android:src="@mipmap/nexticon"
-        android:layout_alignParentRight="true"
-        android:background="@color/colorPrimary"/>
+        <TextView
+            android:id="@+id/txtMonth"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:text="Aug"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"
+            android:textColor="@android:color/white"/>
+
+        <ImageButton
+            android:id="@+id/btnNext"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="centerCrop"
+            android:src="@android:drawable/ic_media_play"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorPrimary"
+            />
+    </LinearLayout>
+
+
 
 </RelativeLayout>
