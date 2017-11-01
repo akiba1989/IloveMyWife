@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -237,17 +238,15 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
 
 //        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 
-        btnPre = v.findViewById(R.id.action_pre);
-        btnNext = v.findViewById(R.id.action_next);
-        txtMonth= v.findViewById(R.id.action_month);
+        btnPre = v.findViewById(R.id.btnPre);
+        btnNext = v.findViewById(R.id.btnNext);
+        txtMonth= (TextView) v.findViewById(R.id.txtMonth);
         txtMonth.setText(txtM);
         final Calendar calendar = getCalendarByTREEMAP(calendarListView.getCurrentSelectedDate());
         btnPre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                Toast.makeText(getApplicationContext(), "pre selected", Toast.LENGTH_SHORT)
-                        .show();
                 calendar.add(Calendar.MONTH, -1);
                 calendarListView.setCurrentSelectedDate(TREEMAP_FORMAT.format(calendar.getTime()));
 //                txtMonth.setTitle(YEAR_MONTH_FORMAT.format(calendar.getTime()));
@@ -258,8 +257,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "next selected", Toast.LENGTH_SHORT)
-                        .show();
+
                 calendar.add(Calendar.MONTH, 1);
                 calendarListView.setCurrentSelectedDate(TREEMAP_FORMAT.format(calendar.getTime()));
 //                txtMonth.setTitle(YEAR_MONTH_FORMAT.format(calendar.getTime()));
@@ -267,7 +265,11 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
                 calendarListView.changeMonth(1);
             }
         });
-        actionBar.setCustomView(v);
+        ActionBar.LayoutParams params = new ActionBar.LayoutParams(
+                ActionBar.LayoutParams.MATCH_PARENT,
+                ActionBar.LayoutParams.MATCH_PARENT,
+                Gravity.CENTER);
+        actionBar.setCustomView(v, params);
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -354,12 +356,12 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
     // generate test data for CalendarView,imitate to be a Network Requests. update "calendarItemAdapter.getDayModelList()"
     //and notifyDataSetChanged will update CalendarView.
     private void loadCalendarData(final String date) {
-        Log.i("test3",date);
+
         new Thread() {
             @Override
             public void run() {
                 try {
-                    sleep(300);
+                    sleep(500);
                     handler.post(new Runnable() {
                         @Override
                         public void run() {
@@ -380,7 +382,9 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
                                                     newCount++;
                                             }
                                             customCalendarItemModel.setNewsCount(newCount);
-                                            if(MainScreenActivity.appConfig.containDate(date)) {
+                                            Log.i("test3",d.substring(5,10));
+                                            if(MainScreenActivity.appConfig.containDate(d)) {
+                                                Toast.makeText(getApplicationContext(),"dung roi "+d, Toast.LENGTH_LONG).show();
                                                 customCalendarItemModel.setHoliday(true);
                                                 customCalendarItemModel.setFav(true);
                                             }
@@ -408,6 +412,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
             }
 
         }.start();
+//        calendarItemAdapter.notifyDataSetChanged();
 
     }
 

@@ -87,7 +87,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:layout_marginTop="5dp"
-            android:background="@color/black_80000000">
+            android:background="@color/black_80000000"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,7 +98,8 @@
             android:textColor="@android:color/black"
             android:layout_weight="1"
             android:textSize="15sp"
-            android:text="Is today a beautiful day with your wife and you find this application useful? Support its development by sending a donation to the developer."/>
+            android:text="Is today a beautiful day with your wife and you find this application useful? Support its development by sending a donation to the developer."
+            />
         <mehdi.sakout.fancybuttons.FancyButton
             android:id="@+id/btnDonate"
             android:layout_width="150dp"
@@ -114,21 +115,19 @@
             android:layout_weight="1"
             />
         <!--<mehdi.sakout.fancybuttons.FancyButton-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Read our privacy"-->
-            <!--android:layout_marginLeft="10dp"-->
-            <!--android:layout_marginRight="10dp"-->
-            <!--android:layout_marginTop="10dp"-->
-            <!--android:layout_marginBottom="5dp"-->
-            <!--fancy:fb_defaultColor="#FAFAFA"-->
-            <!--fancy:fb_focusColor="#5474b8"-->
-            <!--fancy:fb_radius="5dp"-->
-            <!--fancy:fb_textColor="@android:color/black"-->
-            <!--android:layout_weight="1"-->
-            <!--/>-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Read our privacy"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--fancy:fb_defaultColor="#FAFAFA"-->
+        <!--fancy:fb_focusColor="#5474b8"-->
+        <!--fancy:fb_radius="5dp"-->
+        <!--fancy:fb_textColor="@android:color/black"-->
+        <!--android:layout_weight="1"-->
+        <!--/>-->
     </LinearLayout>
-
-
 
 </LinearLayout>

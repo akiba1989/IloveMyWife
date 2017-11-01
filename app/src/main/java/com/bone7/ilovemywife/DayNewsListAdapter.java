@@ -50,6 +50,10 @@ public class DayNewsListAdapter extends BaseCalendarListAdapter<NewsService.News
         }
         headerViewHolder.dayText.setText(dayStr);
         headerViewHolder.yearMonthText.setText(CalendarScreenActivity.YEAR_MONTH_FORMAT.format(calendar.getTime()));
+        if(MainScreenActivity.appConfig.containDate(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime())))
+            headerViewHolder.isFavImage.setImageResource(R.mipmap.ic_btn_calendar_heart_normal);
+        else
+            headerViewHolder.isFavImage.setImageResource(R.mipmap.ic_btn_calendar_heart_down);
         headerViewHolder.eventText.setText(MainScreenActivity.appConfig.getEventName(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime())));
         return convertView;
     }

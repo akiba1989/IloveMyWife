@@ -19,7 +19,7 @@ public class MyConfigClass {
     {
         for (int i = 0;i<eventList.size();i++)
         {
-            if(eventList.get(i).eventDate.equals(date))
+            if(eventList.get(i).eventDate.substring(5,10).equals(date.substring(5,10)))
                 return true;
         }
         return false;
@@ -28,10 +28,10 @@ public class MyConfigClass {
     {
         for (int i = 0;i<eventList.size();i++)
         {
-            if(eventList.get(i).eventDate.equals(date))
+            if(eventList.get(i).eventDate.substring(5,10).equals(date.substring(5,10)))
                 return eventList.get(i).eventName;
         }
-        return "No event today";
+        return "";
     }
 
     public MyConfigClass(){};

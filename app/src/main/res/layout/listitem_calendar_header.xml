@@ -32,7 +32,8 @@
         android:layout_marginLeft="10dp"
         android:textColor="#333333"
         android:textSize="20sp"
-        tools:text="2016.07" />
+        tools:text="2016.07"
+        android:layout_gravity="center"/>
 
 
 
@@ -48,11 +49,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toLeftOf="@+id/header_btn_fav"
-            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="15sp"
             tools:text="aa"
-            android:layout_alignParentLeft="true"
+            
             />
 
         <ImageView

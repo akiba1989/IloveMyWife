@@ -66,7 +66,7 @@ public class CalendarItemAdapter extends BaseCalendarItemAdapter<CustomCalendarI
 
         ImageView isFavImageView = (ImageView) view.findViewById(R.id.image_is_fav);
         if (model.isFav()) {
-//            isFavImageView.setVisibility(View.VISIBLE);
+            isFavImageView.setVisibility(View.VISIBLE);
         } else {
             isFavImageView.setVisibility(View.GONE);
         }
