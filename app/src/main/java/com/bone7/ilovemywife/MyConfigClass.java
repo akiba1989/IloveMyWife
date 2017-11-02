@@ -24,6 +24,15 @@ public class MyConfigClass {
         }
         return false;
     }
+    public boolean containMonth(String month)
+    {
+        for (int i = 0;i<eventList.size();i++)
+        {
+            if(eventList.get(i).eventDate.substring(5,7).equals(month))
+                return true;
+        }
+        return false;
+    }
     public String getEventName (String date)
     {
         for (int i = 0;i<eventList.size();i++)

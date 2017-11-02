@@ -9,8 +9,8 @@
         android:layout_toLeftOf="@+id/buttonList"
         android:gravity="center_vertical"
         android:layout_marginLeft="20dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginBottom="3dp"
+        android:layout_marginTop="3dp"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         android:orientation="vertical">
@@ -21,7 +21,7 @@
             android:text="test"
             android:textColor="@android:color/black"
             android:textSize="15sp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginBottom="3dp"
 
             />
         <TextView

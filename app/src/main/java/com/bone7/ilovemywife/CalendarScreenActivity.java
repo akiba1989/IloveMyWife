@@ -366,7 +366,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
                         @Override
                         public void run() {
 //                            Toast.makeText(CalendarScreenActivity.this, date+", "+calendarListView.getCurrentSelectedDate().substring(0, 7), Toast.LENGTH_SHORT).show();
-                            Random random = new Random();
+
 //                            if (date.equals(calendarListView.getCurrentSelectedDate().substring(0, 7)))
                             {
                                 for (String d : listTreeMap.keySet()) {
@@ -384,7 +384,6 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
                                             customCalendarItemModel.setNewsCount(newCount);
                                             Log.i("test3",d.substring(5,10));
                                             if(MainScreenActivity.appConfig.containDate(d)) {
-                                                Toast.makeText(getApplicationContext(),"dung roi "+d, Toast.LENGTH_LONG).show();
                                                 customCalendarItemModel.setHoliday(true);
                                                 customCalendarItemModel.setFav(true);
                                             }
@@ -397,6 +396,33 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
                                                     imageActions.addAll(listTreeMap.get(d).get(i).getImages());
                                             }
                                             customCalendarItemModel.setListImages(imageActions);
+                                        }
+
+                                    }
+                                }
+
+                                if(MainScreenActivity.appConfig.containMonth(date.substring(5,7)))
+                                {
+
+                                    for(MyConfigClass.MyEvent event : MainScreenActivity.appConfig.eventList)
+                                    {
+                                        if(event.eventDate.substring(5,7).equals(date.substring(5,7)))
+                                        {
+                                            Log.i("date1", date+event.eventDate.substring(7,10));
+                                            CustomCalendarItemModel itemModel = calendarItemAdapter.getDayModelList().get(date+event.eventDate.substring(7,10));
+                                            if(itemModel != null)
+                                            {
+                                                itemModel.setHoliday(true);
+                                                itemModel.setFav(true);
+                                            }
+                                            else
+                                            {
+                                                itemModel = new CustomCalendarItemModel();
+                                                itemModel.setHoliday(true);
+                                                itemModel.setFav(true);
+                                                calendarItemAdapter.getDayModelList().put(date+event.eventDate.substring(7,10), itemModel);
+
+                                            }
                                         }
 
                                     }
