@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
+import android.webkit.WebView;
 
 public class AboutActivity extends AppCompatActivity {
 
@@ -14,7 +14,9 @@ public class AboutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about);
-
+        WebView webview = (WebView)findViewById(R.id.webviewInfor);
+        webview.getSettings().setJavaScriptEnabled(true);
+        webview.loadUrl("file:///android_asset/about.html");
     }
 
 
