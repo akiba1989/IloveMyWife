@@ -25,7 +25,7 @@ import java.util.TreeMap;
  */
 public class CalendarView extends FrameLayout {
     private static final int ROW_ITEM_COUNT = 7;
-    private static final int COLUMN_ITEM_COUNT = 5;
+    private static int COLUMN_ITEM_COUNT = 5;
     private static final int ITEM_HEIGHT = 40;
     public static int mItemWidth = 0;
     public static int mItemHeight = 0;
@@ -52,6 +52,11 @@ public class CalendarView extends FrameLayout {
         mItemWidth = CalendarHelper.width / ROW_ITEM_COUNT;
         mItemHeight = mItemWidth;
         gestureDetector = new GestureDetector(context, new FlingListener());
+    }
+
+    public void SET_COLUMN_ITEM_COUNT(int c)
+    {
+        this.COLUMN_ITEM_COUNT = c;
     }
 
 
@@ -179,7 +184,10 @@ public class CalendarView extends FrameLayout {
     }
 
     private TreeMap<String, BaseCalendarItemModel> getDefaultCalendarDataListByYearMonth(String yearMonth) {
-
+        if(yearMonth.substring(5,7).equals("07") ||yearMonth.substring(5,7).equals("10") )
+            COLUMN_ITEM_COUNT = 6;
+        else
+            COLUMN_ITEM_COUNT = 5;
         int calendarViewRow = COLUMN_ITEM_COUNT;
         int calendarViewColumn = ROW_ITEM_COUNT;
 
