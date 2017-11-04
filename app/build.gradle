@@ -32,8 +32,9 @@ dependencies {
 
     // If you want pre-written Activities and Fragments you can subclass as providers
 
-
+    compile 'org.sufficientlysecure:donations:2.5'
     compile 'com.afollestad.material-dialogs:core:0.9.4.7'
+    compile 'com.kila.apprater_dialog.lars:apprater-dialog:1.0.5'
     compile 'org.apmem.tools:layouts:1.10@aar'
     compile 'com.android.support:appcompat-v7:26.0.1'
     compile 'com.google.android.gms:play-services-ads:10.2.4'

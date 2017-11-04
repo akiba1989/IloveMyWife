@@ -24,7 +24,7 @@
             android:weightSum="2">
             <mehdi.sakout.fancybuttons.FancyButton
                 android:id="@+id/btnDonate"
-                android:layout_width="170dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:text=" DONATE US "
                 android:layout_marginLeft="10dp"
@@ -37,74 +37,147 @@
                 android:layout_weight="1"
                 />
             <mehdi.sakout.fancybuttons.FancyButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Read our privacy"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"
-            fancy:fb_defaultColor="#FAFAFA"
-            fancy:fb_focusColor="#5474b8"
-            fancy:fb_radius="5dp"
-            fancy:fb_textColor="@android:color/black"
-            android:layout_weight="1"
-            />
+                android:id="@+id/btnPrivacy"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="OUR PRIVACY"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                fancy:fb_defaultColor="#007FFE"
+                fancy:fb_focusColor="#5474b8"
+                fancy:fb_radius="30dp"
+                android:layout_weight="1"
+                />
 
         </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Share us on"
-            android:textSize="20sp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center"/>
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_gravity="center">
+            android:orientation="horizontal"
+            android:weightSum="2">
+
             <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/btn_share_fb"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:id="@+id/btnShare"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=" SHARE US "
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:padding="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 fancy:fb_defaultColor="#3A5897"
-                fancy:fb_focusColor="#313131"
-                fancy:fb_iconPaddingLeft="0dp"
-                fancy:fb_iconPaddingRight="0dp"
-                fancy:fb_iconResource="@mipmap/facebook"
-                fancy:fb_radius="64dp">
-            </mehdi.sakout.fancybuttons.FancyButton>
+                fancy:fb_focusColor="#5474b8"
+                fancy:fb_radius="30dp"
+                android:layout_weight="1"
+                />
             <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/btn_share_tw"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
+                android:id="@+id/btnRate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text=" RATE US"
+                android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:padding="10dp"
-                fancy:fb_defaultColor="#55ACEE"
-                fancy:fb_focusColor="#313131"
-                fancy:fb_iconPaddingLeft="0dp"
-                fancy:fb_iconPaddingRight="0dp"
-                fancy:fb_iconResource="@mipmap/twitter"
-                fancy:fb_radius="64dp">
-            </mehdi.sakout.fancybuttons.FancyButton>
-            <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/btn_share_gp"
-                android:layout_width="55dp"
-                android:layout_height="55dp"
-                android:layout_marginRight="10dp"
-                android:padding="10dp"
-                fancy:fb_defaultColor="#DD4B39"
-                fancy:fb_focusColor="#313131"
-                fancy:fb_iconPaddingLeft="0dp"
-                fancy:fb_iconPaddingRight="0dp"
-                fancy:fb_iconResource="@mipmap/gplus"
-                fancy:fb_radius="64dp">
-            </mehdi.sakout.fancybuttons.FancyButton>
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                fancy:fb_defaultColor="#FF8800"
+                fancy:fb_focusColor="#5474b8"
+                fancy:fb_radius="30dp"
+                android:layout_weight="1"
+                />
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical">-->
+
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:text="Share us on"-->
+                    <!--android:textSize="20sp" />-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_gravity="center"-->
+                    <!--android:layout_marginLeft="10dp">-->
+
+                    <!--<mehdi.sakout.fancybuttons.FancyButton-->
+                        <!--android:id="@+id/btn_share_fb"-->
+                        <!--android:layout_width="55dp"-->
+                        <!--android:layout_height="55dp"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:padding="10dp"-->
+                        <!--fancy:fb_defaultColor="#3A5897"-->
+                        <!--fancy:fb_focusColor="#313131"-->
+                        <!--fancy:fb_iconPaddingLeft="0dp"-->
+                        <!--fancy:fb_iconPaddingRight="0dp"-->
+                        <!--fancy:fb_iconResource="@mipmap/facebook"-->
+                        <!--fancy:fb_radius="64dp"></mehdi.sakout.fancybuttons.FancyButton>-->
+
+                    <!--<mehdi.sakout.fancybuttons.FancyButton-->
+                        <!--android:id="@+id/btn_share_tw"-->
+                        <!--android:layout_width="55dp"-->
+                        <!--android:layout_height="55dp"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:padding="10dp"-->
+                        <!--fancy:fb_defaultColor="#55ACEE"-->
+                        <!--fancy:fb_focusColor="#313131"-->
+                        <!--fancy:fb_iconPaddingLeft="0dp"-->
+                        <!--fancy:fb_iconPaddingRight="0dp"-->
+                        <!--fancy:fb_iconResource="@mipmap/twitter"-->
+                        <!--fancy:fb_radius="64dp"></mehdi.sakout.fancybuttons.FancyButton>-->
+
+                    <!--<mehdi.sakout.fancybuttons.FancyButton-->
+                        <!--android:id="@+id/btn_share_gp"-->
+                        <!--android:layout_width="55dp"-->
+                        <!--android:layout_height="55dp"-->
+                        <!--android:layout_marginRight="10dp"-->
+                        <!--android:padding="10dp"-->
+                        <!--fancy:fb_defaultColor="#DD4B39"-->
+                        <!--fancy:fb_focusColor="#313131"-->
+                        <!--fancy:fb_iconPaddingLeft="0dp"-->
+                        <!--fancy:fb_iconPaddingRight="0dp"-->
+                        <!--fancy:fb_iconResource="@mipmap/gplus"-->
+                        <!--fancy:fb_radius="64dp"></mehdi.sakout.fancybuttons.FancyButton>-->
+                <!--</LinearLayout>-->
+            <!--</LinearLayout>-->
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:orientation="vertical"-->
+                <!--android:gravity="center"-->
+                <!--&gt;-->
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Rate us"-->
+                    <!--android:textSize="20sp"-->
+                    <!--android:layout_marginBottom="10dp"-->
+                    <!--android:layout_marginLeft="20dp"-->
+                    <!--android:layout_gravity="center"/>-->
+                <!--<mehdi.sakout.fancybuttons.FancyButton-->
+                    <!--android:id="@+id/btn_rate"-->
+                    <!--android:layout_width="55dp"-->
+                    <!--android:layout_height="55dp"-->
+                    <!--android:layout_marginRight="10dp"-->
+                    <!--android:padding="10dp"-->
+                    <!--fancy:fb_defaultColor="#DD4B39"-->
+                    <!--fancy:fb_focusColor="#313131"-->
+                    <!--fancy:fb_iconPaddingLeft="0dp"-->
+                    <!--fancy:fb_iconPaddingRight="0dp"-->
+                    <!--fancy:fb_iconResource="@mipmap/gplus"-->
+                    <!--fancy:fb_radius="64dp"-->
+                    <!--android:layout_marginLeft="20dp"></mehdi.sakout.fancybuttons.FancyButton>-->
+            <!--</LinearLayout>-->
         </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

@@ -29,6 +29,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -155,6 +156,7 @@ public class SettingScreenActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         MyConfigClass.MyEvent event = new MyConfigClass.MyEvent(editText.getText().toString(), editTextDate.getText().toString());
                         appConfig.eventList.add(event);
+                        Collections.sort(appConfig.eventList, new MyAndroidHelper.EventComparator());
                         eventAdapter.notifyDataSetChanged();
                         dialog.dismiss();
                     }
@@ -162,6 +164,8 @@ public class SettingScreenActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+
+
     }
     @Override
     protected void onPause() {

@@ -133,7 +133,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="8dp"
-                android:text="Your next job"
+                android:text="No event"
                 android:textColor="#333333"
                  />
         </LinearLayout>
@@ -190,7 +190,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="8dp"
-                android:text="Your next job"
+                android:text="No event"
                 android:textColor="#333333"
                 />
         </LinearLayout>

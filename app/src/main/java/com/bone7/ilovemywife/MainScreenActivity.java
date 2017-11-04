@@ -7,6 +7,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.kila.apprater_dialog.lars.AppRater;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,11 +16,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.concurrent.TimeUnit;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -41,6 +44,19 @@ public class MainScreenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //App rate dialog
+
+        if(savedInstanceState != null) {
+            new AppRater.StarBuilder(this, "com.bone7.ilovemywife")
+                    .showDefault()
+                    .minimumNumberOfStars(4)
+                    .email("akiba1989@gmail.com")
+                    .timesToLaunch(5)
+                    .daysToWait(1)
+                    .timesToLaunchInterval(2)
+                    .appLaunched();
+        }
 //        setContentView(R.layout.activity_main_screen);
         setContentView(R.layout.new_main_layout_2);
 
@@ -77,7 +93,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
         //Check config
         myConfig = MyAndroidHelper.readFromFile("config", getApplicationContext());
-        if(myConfig.length() < 0)
+        if(myConfig.length() < 2)
         {
             MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
                     .title(R.string.dialog_firsttime_title)
@@ -95,18 +111,71 @@ public class MainScreenActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
+            View negative = dialog.getActionButton(DialogAction.NEGATIVE);
+            negative.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    appConfig = new MyConfigClass();
+                    appConfig.notification = true;
+                    appConfig.eventList = new ArrayList<>();
+                }
+            });
             dialog.show();
         }
-        if(myConfig.length() < 2)
-        {
-            appConfig = new MyConfigClass();
-            appConfig.notification = true;
-            appConfig.eventList = new ArrayList<>();
-        }else
+        else
         {
             Type listType = new TypeToken<MyConfigClass>(){}.getType();
             appConfig = (MyConfigClass) gson.fromJson(myConfig, listType);
         }
+
+        // Fetch next event
+        fetchNextEvent();
+    }
+    public void fetchNextEvent()
+    {
+
+        if(appConfig.eventList.size() == 0)
+            return;
+        else {
+            TextView header_day, header_yearmonth, header_event,header_day1, header_yearmonth1, header_event1;
+            header_day = (TextView) findViewById(R.id.header_day);
+            header_yearmonth = (TextView) findViewById(R.id.header_year_month);
+            header_event = (TextView) findViewById(R.id.txt_next_event);
+            header_day1 = (TextView) findViewById(R.id.header_day1);
+            header_yearmonth1 = (TextView) findViewById(R.id.header_year_month1);
+            header_event1 = (TextView) findViewById(R.id.txt_next_event1);
+            Calendar calendar = Calendar.getInstance();
+            if (appConfig.eventList.size() == 1) {
+                header_day.setText(appConfig.eventList.get(0).eventDate.substring(8,10));
+                header_yearmonth.setText(appConfig.eventList.get(0).eventDate.substring(5,7));
+                header_event.setText(appConfig.eventList.get(0).eventName);
+            }
+            else
+            {
+                MyConfigClass.MyEvent event1,event2;
+                String today = CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime());
+                int index = 0;
+                for(int i = 0;i<appConfig.eventList.size();i++)
+                {
+                    if(appConfig.eventList.get(i).eventDate.substring(5,10).compareTo(today.substring(5,10)) > 0)
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                event1 = appConfig.eventList.get(index);
+                event2 = appConfig.eventList.get((index+1)%appConfig.eventList.size());
+                header_day.setText(event1.eventDate.substring(8,10));
+                header_yearmonth.setText(event1.eventDate.substring(5,7));
+                header_event.setText(event1.eventName);
+
+                header_day1.setText(event2.eventDate.substring(8,10));
+                header_yearmonth1.setText(event2.eventDate.substring(5,7));
+                header_event1.setText(event2.eventName);
+            }
+        }
+
+
     }
 
 
@@ -184,6 +253,7 @@ public class MainScreenActivity extends AppCompatActivity {
     protected void onResume() {
 
         super.onResume();
+        fetchNextEvent();
 //        myConfig = MyAndroidHelper.readFromFile("config", getApplicationContext());
 //        Log.i("myconfigMain",myConfig);
 
