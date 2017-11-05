@@ -102,7 +102,7 @@ public class MyAndroidHelper {
     public static class EventComparator implements Comparator<MyConfigClass.MyEvent>
     {
         public int compare(MyConfigClass.MyEvent lhs, MyConfigClass.MyEvent rhs) {
-            return rhs.eventDate.substring(5,10).compareTo(lhs.eventDate.substring(5,10));
+            return lhs.eventDate.substring(5,10).compareTo(rhs.eventDate.substring(5,10));
         }
     }
 

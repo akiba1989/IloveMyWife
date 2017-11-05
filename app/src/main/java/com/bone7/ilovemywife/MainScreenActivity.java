@@ -33,7 +33,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
     private static final int START_LEVEL = 1;
     private int mLevel;
-    private FancyButton btnCalendar, btnSetting, btnViewTips;
+    private FancyButton btnCalendar, btnSetting, btnViewTips, btnAbout;
     private InterstitialAd mInterstitialAd;
     public static String myConfig="";
     public static MyConfigClass appConfig;
@@ -130,6 +130,18 @@ public class MainScreenActivity extends AppCompatActivity {
 
         // Fetch next event
         fetchNextEvent();
+
+        btnAbout = (FancyButton) findViewById(R.id.btnAbout);
+        btnAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(getApplicationContext(), AboutActivity.class);
+//                intent.putExtra("config",myConfig);
+//                intent.putExtra("config",gson.toJson(appConfig));
+                startActivity(intent);
+            }
+        });
+
     }
     public void fetchNextEvent()
     {
