@@ -419,9 +419,9 @@ public class PinnedHeaderListView extends ListView implements OnScrollListener {
                 R.anim.rotate_back_180);
         mAnimRotateBack.setFillAfter(true);
 
-        newJobBtn = new Button(context);
-        newJobBtn.setText("Add a job");
-        addFooterView(newJobBtn);
+//        newJobBtn = new Button(context);
+//        newJobBtn.setText("Add a job");
+//        addFooterView(newJobBtn);
     }
     public Button getAddNewJobBtn()
     {

@@ -10,6 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import com.kila.apprater_dialog.lars.AppRater;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -22,7 +23,7 @@ import android.widget.Toast;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.concurrent.TimeUnit;
+import java.util.Random;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -33,17 +34,19 @@ public class MainScreenActivity extends AppCompatActivity {
 
     private static final int START_LEVEL = 1;
     private int mLevel;
-    private FancyButton btnCalendar, btnSetting, btnViewTips, btnAbout;
+    private FancyButton btnCalendar, btnSetting, btnViewAllTips, btnAbout;
     private InterstitialAd mInterstitialAd;
     public static String myConfig="";
     public static MyConfigClass appConfig;
     Intent intent;
     Gson gson = new Gson();
+    TextView txtTip;
 //    private TextView mLevelTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //App rate dialog
 
@@ -59,6 +62,7 @@ public class MainScreenActivity extends AppCompatActivity {
         }
 //        setContentView(R.layout.activity_main_screen);
         setContentView(R.layout.new_main_layout_2);
+
 
         // Create the next level button, which tries to show an interstitial when clicked.
 //        btnCalendar = ((Button) findViewById(R.id.next_level_button));
@@ -81,9 +85,14 @@ public class MainScreenActivity extends AppCompatActivity {
                 showInterstitial();
             }
         });
-        btnViewTips = (FancyButton) findViewById(R.id.btnViewTips);
-
-
+        btnViewAllTips = (FancyButton) findViewById(R.id.btnViewTips);
+        btnViewAllTips.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(getApplicationContext(), ViewAllTipsActivity.class);
+                showInterstitial();
+            }
+        });
         // Create the InterstitialAd and set the adUnitId (defined in values/strings.xml).
         mInterstitialAd = newInterstitialAd();
         loadInterstitial();
@@ -142,6 +151,11 @@ public class MainScreenActivity extends AppCompatActivity {
             }
         });
 
+        //for tips:
+        txtTip = (TextView)findViewById(R.id.txtTip);
+        Random RAND = new Random();
+        int nextValue = RAND.nextInt(10);
+        txtTip.setText(MyAndroidHelper.readFromAssetsFile("Tips/tip"+nextValue+".txt",getApplicationContext()));
     }
     public void fetchNextEvent()
     {
@@ -247,7 +261,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
     private void loadInterstitial() {
         // Disable the next level button and load the ad.
-        btnCalendar.setEnabled(false);
+//        btnCalendar.setEnabled(false);
         AdRequest adRequest = new AdRequest.Builder()
                 .setRequestAgent("android_studio:ad_template").build();
         mInterstitialAd.loadAd(adRequest);

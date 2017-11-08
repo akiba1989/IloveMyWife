@@ -40,7 +40,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.TreeMap;
 
-
+import mehdi.sakout.fancybuttons.FancyButton;
 
 
 public class CalendarScreenActivity extends RxAppCompatActivity {
@@ -97,14 +97,20 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
 
 
         calendarListView = (CalendarListView) findViewById(R.id.calendar_listview);
-        calendarListView.SetAddNewJobBtnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Toast.makeText(getApplicationContext(),"Add new job btn clicked!",Toast.LENGTH_LONG).show();
-                dialog.show();
 
+        FancyButton btnAddNewAction = (FancyButton) findViewById(R.id.btnAddNewAction);
+        btnAddNewAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
             }
         });
+//        calendarListView.SetAddNewJobBtnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                dialog.show();
+//            }
+//        });
 
         View positive = dialog.getActionButton(DialogAction.POSITIVE);
         positive.setOnClickListener(new View.OnClickListener() {
@@ -207,6 +213,8 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
                 Log.i("test3", selectedDate.substring(0,7));
             }
         });
+
+
     }
     @Override
     protected void onPause() {

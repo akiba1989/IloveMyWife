@@ -44,7 +44,7 @@ public class CalendarListView extends FrameLayout {
     private onListPullListener onListPullListener;
     private OnCalendarViewItemClickListener onCalendarViewItemClickListener;
 
-//    public PinnedHeaderListView getPinnedHeaderListView(){return listView;};
+    public PinnedHeaderListView getPinnedHeaderListView(){return listView;}
     public CalendarListView(final Context context, AttributeSet attrs) {
         super(context, attrs);
         CalendarHelper.init(context);
