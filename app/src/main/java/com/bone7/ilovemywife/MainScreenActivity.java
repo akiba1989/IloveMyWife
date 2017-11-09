@@ -24,6 +24,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import mehdi.sakout.fancybuttons.FancyButton;
 
@@ -49,16 +50,17 @@ public class MainScreenActivity extends AppCompatActivity {
         setRequestedOrientation (ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //App rate dialog
+        new AppRater.StarBuilder(this, "com.bone7.ilovemywife")
+                .showDefault()
+                .minimumNumberOfStars(4)
+                .email("akiba1989@gmail.com")
+                .timeToWait(TimeUnit.DAYS, 7)
+                .timesToLaunch(5)
+                .timesToLaunchInterval(3)
+                .appLaunched();
 
         if(savedInstanceState != null) {
-            new AppRater.StarBuilder(this, "com.bone7.ilovemywife")
-                    .showDefault()
-                    .minimumNumberOfStars(4)
-                    .email("akiba1989@gmail.com")
-                    .timesToLaunch(5)
-                    .daysToWait(1)
-                    .timesToLaunchInterval(2)
-                    .appLaunched();
+
         }
 //        setContentView(R.layout.activity_main_screen);
         setContentView(R.layout.new_main_layout_2);
@@ -67,7 +69,7 @@ public class MainScreenActivity extends AppCompatActivity {
         // Create the next level button, which tries to show an interstitial when clicked.
 //        btnCalendar = ((Button) findViewById(R.id.next_level_button));
         btnCalendar = ((FancyButton) findViewById(R.id.btnCalendar));
-        btnCalendar.setEnabled(false);
+//        btnCalendar.setEnabled(false);
         btnCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -136,7 +138,7 @@ public class MainScreenActivity extends AppCompatActivity {
             Type listType = new TypeToken<MyConfigClass>(){}.getType();
             appConfig = (MyConfigClass) gson.fromJson(myConfig, listType);
         }
-
+        Log.i("myconfig", myConfig);
         // Fetch next event
         fetchNextEvent();
 
@@ -159,7 +161,7 @@ public class MainScreenActivity extends AppCompatActivity {
             txtTip.setText(MyAndroidHelper.readFromAssetsFile("Tips/tip0.txt",getApplicationContext()));
         else {
             nextValue = RAND.nextInt(50);
-            txtTip.setText(MyAndroidHelper.readFromAssetsFile("Tips/tip" + nextValue + ".txt", getApplicationContext()));
+            txtTip.setText("Tip: "+MyAndroidHelper.readFromAssetsFile("Tips/tip" + nextValue + ".txt", getApplicationContext()));
         }
         if(nextValue ==0)
         {
@@ -177,7 +179,7 @@ public class MainScreenActivity extends AppCompatActivity {
     public void fetchNextEvent()
     {
 
-        if(appConfig.eventList.size() == 0)
+        if(appConfig==null || appConfig.eventList.size() == 0)
             return;
         else {
             TextView header_day, header_yearmonth, header_event,header_day1, header_yearmonth1, header_event1;

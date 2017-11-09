@@ -12,6 +12,6 @@ public class ViewAllTipsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_all_tips);
         content = (WebView)findViewById(R.id.webView);
-        content.loadUrl("file:///assets/Tips/tips.html");
+        content.loadUrl("file:///android_asset/Tips/tips.html");
     }
 }

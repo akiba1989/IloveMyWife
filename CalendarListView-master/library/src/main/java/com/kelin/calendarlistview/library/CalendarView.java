@@ -187,7 +187,7 @@ public class CalendarView extends FrameLayout {
         if(yearMonth.substring(5,7).equals("07") ||yearMonth.substring(5,7).equals("10") )
             COLUMN_ITEM_COUNT = 6;
         else
-            COLUMN_ITEM_COUNT = 5;
+            COLUMN_ITEM_COUNT = 6;
         int calendarViewRow = COLUMN_ITEM_COUNT;
         int calendarViewColumn = ROW_ITEM_COUNT;
 
