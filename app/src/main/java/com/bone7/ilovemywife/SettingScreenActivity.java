@@ -165,7 +165,14 @@ public class SettingScreenActivity extends AppCompatActivity {
             }
         });
 
-
+        btnDonate = (FancyButton) findViewById(R.id.btnDonate);
+        btnDonate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), DonationActivity.class);
+                startActivity(intent);
+            }
+        });
     }
     @Override
     protected void onPause() {

@@ -9,12 +9,15 @@ import java.util.ArrayList;
 
 public class MyConfigClass {
     public boolean notification = true;
+    public boolean enableAds = true;
     public ArrayList<MyEvent> eventList;
     public MyConfigClass ( boolean notification, ArrayList<MyEvent> eventList)
     {
         this.notification = notification;
         this.eventList = eventList;
+        enableAds = true;
     }
+
     public boolean containDate(String date)
     {
         for (int i = 0;i<eventList.size();i++)
@@ -43,7 +46,11 @@ public class MyConfigClass {
         return "";
     }
 
-    public MyConfigClass(){};
+    public MyConfigClass(){
+        this.notification = true;
+        this.eventList = new ArrayList<>();
+        enableAds = true;
+    }
     public static class MyEvent
     {
         public String eventName;

@@ -14,7 +14,7 @@ import mehdi.sakout.fancybuttons.FancyButton;
 
 public class AboutActivity extends AppCompatActivity {
 
-    FancyButton btnPrivacy, btnFb, btnTwitter, btnGp;
+    FancyButton btnPrivacy, btnFb, btnRate, btnDonate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +36,7 @@ public class AboutActivity extends AppCompatActivity {
         btnFb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String url = "http://play.google.com/store/apps/details?id=bone7.nyanyaninja";
+                String url = "http://play.google.com/store/apps/details?id=com.bone7.ilovemywife";
                 try {
                     Intent intent1 = new Intent();
 //                    intent1.setClassName("com.facebook.katana", "com.facebook.katana.activity.composer.ImplicitShareIntentHandler");
@@ -50,6 +50,24 @@ public class AboutActivity extends AppCompatActivity {
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(sharerUrl));
                     startActivity(intent);
                 }
+            }
+        });
+
+        btnRate = (FancyButton) findViewById(R.id.btnRate);
+        btnRate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("market://details?id=com.bone7.ilovemywife"));
+                startActivity(intent);
+            }
+        });
+        btnDonate = (FancyButton) findViewById(R.id.btnDonate);
+        btnDonate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), DonationActivity.class);
+                startActivity(intent);
             }
         });
     }

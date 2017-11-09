@@ -49,8 +49,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.bone7.ilovemywife.MainScreenActivity" />
         </activity>
-        <activity android:name=".ViewAllTipsActivity"
-            android:configChanges="orientation|screenSize"></activity>
+        <activity
+            android:name=".ViewAllTipsActivity"
+            android:configChanges="orientation|screenSize" />
+        <activity android:name=".DonationActivity"></activity>
     </application>
 
 </manifest>

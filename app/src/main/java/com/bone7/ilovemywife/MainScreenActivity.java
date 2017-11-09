@@ -154,8 +154,25 @@ public class MainScreenActivity extends AppCompatActivity {
         //for tips:
         txtTip = (TextView)findViewById(R.id.txtTip);
         Random RAND = new Random();
-        int nextValue = RAND.nextInt(10);
-        txtTip.setText(MyAndroidHelper.readFromAssetsFile("Tips/tip"+nextValue+".txt",getApplicationContext()));
+        int nextValue= RAND.nextInt(9);
+        if(nextValue == 0)
+            txtTip.setText(MyAndroidHelper.readFromAssetsFile("Tips/tip0.txt",getApplicationContext()));
+        else {
+            nextValue = RAND.nextInt(50);
+            txtTip.setText(MyAndroidHelper.readFromAssetsFile("Tips/tip" + nextValue + ".txt", getApplicationContext()));
+        }
+        if(nextValue ==0)
+        {
+            txtTip.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), DonationActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+        else
+            txtTip.setOnClickListener(null);
     }
     public void fetchNextEvent()
     {
@@ -251,7 +268,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
     private void showInterstitial() {
         // Show the ad if it's ready. Otherwise toast and reload the ad.
-        if (mInterstitialAd != null && mInterstitialAd.isLoaded()) {
+        if (mInterstitialAd != null && mInterstitialAd.isLoaded() && appConfig.enableAds) {
             mInterstitialAd.show();
         } else {
             Toast.makeText(this, "Ad did not load", Toast.LENGTH_SHORT).show();
