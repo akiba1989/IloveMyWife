@@ -42,19 +42,23 @@
                 android:layout_toLeftOf="@+id/rankingArea"
                 android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true">
+
                 <TextView
+                    android:id="@+id/txtTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="Beginner"
-                    android:textSize="30dp"
                     android:textColor="#FAFAFA"
-                    android:layout_gravity="center_vertical"/>
+                    android:textSize="25dp" />
+
                 <TextView
+                    android:id="@+id/txtDes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:text="Relax, you're doing fine!"
-                    android:textColor="#FAFAFA"
-                    android:layout_gravity="center_vertical"/>
+                    android:textColor="#FAFAFA" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/rankingArea"
@@ -69,13 +73,14 @@
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     app:srcCompat="@mipmap/heart_main" />
+
                 <TextView
+                    android:id="@+id/txtScore"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="150"
-                    android:textColor="#FAFAFA"
                     android:layout_gravity="center"
-                    />
+                    android:text="150"
+                    android:textColor="#FAFAFA" />
 
             </LinearLayout>
 
@@ -215,7 +220,7 @@
         android:layout_gravity="center"
         android:layout_weight="7"
         android:weightSum="1.1"
-        android:background="@drawable/layout_bg">
+        android:background="@color/colorPrimary">
         <TextView
             android:id="@+id/txtTip"
             android:layout_width="0px"
@@ -224,7 +229,7 @@
             android:text="Today\'s tip: set your alarm 10 minutes before you need to get up to spend some quality time with your spouse. Those precious 10 minutes of alone time in the morning will set the tone for your day."
             android:layout_weight="1.03"
             android:textStyle="italic"
-            android:textColor="#3b5998"/>
+            android:textColor="#FFFFFF"/>
     </LinearLayout>
             <mehdi.sakout.fancybuttons.FancyButton
                 android:id="@+id/btnCalendar"
@@ -236,7 +241,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="5dp"
                 android:layout_gravity="center"
-                fancy:fb_defaultColor="#3b5998"
+                fancy:fb_defaultColor="@color/colorPrimaryDark"
                 fancy:fb_focusColor="#5474b8"
                 fancy:fb_radius="5dp"
                 />
@@ -244,13 +249,13 @@
                 android:id="@+id/btnViewTips"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="VIEW ALL TIPS"
+                android:text="READ ALL TIPS"
                 android:layout_weight="1"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
-                fancy:fb_defaultColor="#3b5998"
+                fancy:fb_defaultColor="@color/colorPrimaryDark"
                 fancy:fb_focusColor="#5474b8"
                 fancy:fb_radius="5dp"
                 />
@@ -264,7 +269,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_gravity="center"
-                fancy:fb_defaultColor="#3b5998"
+                fancy:fb_defaultColor="@color/colorPrimaryDark"
                 fancy:fb_focusColor="#5474b8"
                 fancy:fb_radius="5dp"
                 />

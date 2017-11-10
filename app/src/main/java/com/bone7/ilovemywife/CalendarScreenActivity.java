@@ -1,27 +1,27 @@
 package com.bone7.ilovemywife;
 
 import android.content.Context;
+import android.os.Build;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-//import com.bone7.ilovemywife.retrofit.RetrofitProvider;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.kelin.calendarlistview.library.CalendarHelper;
@@ -35,12 +35,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
+
 import java.util.TreeMap;
 
-import mehdi.sakout.fancybuttons.FancyButton;
 
 
 public class CalendarScreenActivity extends RxAppCompatActivity {
@@ -72,6 +71,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
         setContentView(R.layout.activity_calendar_screen);
 
 
+
         final PinnedHeaderListView lv  = (PinnedHeaderListView) findViewById(R.id.listview);
         boolean wrapInScrollView = true;
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
@@ -98,13 +98,25 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
 
         calendarListView = (CalendarListView) findViewById(R.id.calendar_listview);
 
-        FancyButton btnAddNewAction = (FancyButton) findViewById(R.id.btnAddNewAction);
-        btnAddNewAction.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        FancyButton btnAddNewAction = (FancyButton) findViewById(R.id.btnAddNewAction);
+//        btnAddNewAction.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                dialog.show();
+//            }
+//        });
+        FloatingActionButton myFab = (FloatingActionButton)  findViewById(R.id.fab);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            RelativeLayout.LayoutParams p = (RelativeLayout.LayoutParams) myFab.getLayoutParams();
+            p.setMargins(0, 0, 0, 0); // get rid of margins since shadow area is now the margin
+            myFab.setLayoutParams(p);
+        }
+        myFab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
                 dialog.show();
             }
         });
+
 //        calendarListView.SetAddNewJobBtnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
@@ -205,7 +217,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
             @Override
             public void onDateSelected(View View, String selectedDate, int listSection, SelectedDateRegion selectedDateRegion) {
                 Log.i("test1",selectedDate);
-
+                saveScore();
                 MyAndroidHelper.writeToFile(selectedDate.substring(0,7), gson.toJson(listTreeMap),getApplicationContext());
 //                Calendar calendar = getCalendarByYearMonthDay(selectedDate);
                 loadDayList(selectedDate);
@@ -220,8 +232,24 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
     protected void onPause() {
 
         super.onPause();
+        saveScore();
         MyAndroidHelper.writeToFile(calendarListView.getCurrentSelectedDate().substring(0,7), gson.toJson(listTreeMap),getApplicationContext());
 
+    }
+    public void saveScore()
+    {
+        int score = 0;
+        for(Map.Entry<String, List<NewsService.News.StoriesBean>> entry : listTreeMap.entrySet())
+        {
+            for(NewsService.News.StoriesBean story : entry.getValue())
+            {
+                if(story.getChecked())
+                    score++;
+            }
+
+        }
+        MainScreenActivity.scoreTreeMap.put(calendarListView.getCurrentSelectedDate().substring(0,7), score);
+        MyAndroidHelper.writeToFile("score", gson.toJson(MainScreenActivity.scoreTreeMap),getApplicationContext());
     }
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {

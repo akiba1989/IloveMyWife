@@ -22,6 +22,22 @@
         <item>50 USD</item>
         <item>100 USD</item>
     </string-array>
+    <string-array name="level_title">
+        <item>Beginner</item>
+        <item>Casual amateur</item>
+        <item>Intermediate amateur</item>
+        <item>Advanced amateur</item>
+        <item>Professional</item>
+        <item>Master</item>
+    </string-array>
+    <string-array name="level_des">
+        <item>Relax, you are doing fine!</item>
+        <item>Go on, you can do it! </item>
+        <item>Don't worry too much!</item>
+        <item>Hang in there!</item>
+        <item>Give it your best shot!</item>
+        <item>Keep up the great work!</item>
+    </string-array>
 
 
     <string name="dialog_firsttime_title">Please setup your settings</string>

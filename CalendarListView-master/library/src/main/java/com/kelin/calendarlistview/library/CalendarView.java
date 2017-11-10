@@ -184,14 +184,13 @@ public class CalendarView extends FrameLayout {
     }
 
     private TreeMap<String, BaseCalendarItemModel> getDefaultCalendarDataListByYearMonth(String yearMonth) {
-        if(yearMonth.substring(5,7).equals("07") ||yearMonth.substring(5,7).equals("10") )
-            COLUMN_ITEM_COUNT = 6;
-        else
-            COLUMN_ITEM_COUNT = 6;
-        int calendarViewRow = COLUMN_ITEM_COUNT;
-        int calendarViewColumn = ROW_ITEM_COUNT;
+//        if(yearMonth.substring(5,7).equals("07") ||yearMonth.substring(5,7).equals("10") )
+//            COLUMN_ITEM_COUNT = 6;
+//        else
+//            COLUMN_ITEM_COUNT = 6;
 
         Calendar calToday = Calendar.getInstance();
+        Calendar temp = Calendar.getInstance();
         Calendar calStartDate = Calendar.getInstance();
         calToday.setFirstDayOfWeek(Calendar.SUNDAY);
         calStartDate.setFirstDayOfWeek(Calendar.SUNDAY);
@@ -202,6 +201,18 @@ public class CalendarView extends FrameLayout {
             e.printStackTrace();
         }
         calStartDate.setTimeInMillis(time);
+        //for checking fist day of month is Saturday or Friday
+        temp.setTimeInMillis(time);
+        temp.set(Calendar.DAY_OF_MONTH,1);
+        if(temp.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY || temp.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY )
+        {
+            COLUMN_ITEM_COUNT = 6;
+        }
+        else
+            COLUMN_ITEM_COUNT = 5;
+        int calendarViewRow = COLUMN_ITEM_COUNT;
+        int calendarViewColumn = ROW_ITEM_COUNT;
+
         calStartDate.set(Calendar.DAY_OF_MONTH, 1);
         calStartDate.set(Calendar.HOUR_OF_DAY, 0);
         calStartDate.set(Calendar.MINUTE, 0);

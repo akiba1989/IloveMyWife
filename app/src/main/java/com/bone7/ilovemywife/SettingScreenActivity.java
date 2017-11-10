@@ -22,6 +22,7 @@ import android.widget.ToggleButton;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.bone7.ilovemywife.notification.NotificationHelper;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -35,7 +36,7 @@ import java.util.List;
 import mehdi.sakout.fancybuttons.FancyButton;
 
 public class SettingScreenActivity extends AppCompatActivity {
-
+    int dateScore = 3;
     MyConfigClass appConfig;
     ListView listView;
     FancyButton btnAddEvent, btnDonate;
@@ -76,6 +77,13 @@ public class SettingScreenActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 appConfig.notification = b;
+                if (b) {
+                    NotificationHelper.scheduleRepeatingRTCNotification(getApplicationContext(), "11", "15");
+                    NotificationHelper.enableBootReceiver(getApplicationContext());
+                } else {
+                    NotificationHelper.cancelAlarmRTC();
+                    NotificationHelper.disableBootReceiver(getApplicationContext());
+                }
             }
         });
 
@@ -178,6 +186,8 @@ public class SettingScreenActivity extends AppCompatActivity {
     protected void onPause() {
 
         super.onPause();
+        MainScreenActivity.scoreTreeMap.put("setting",appConfig.eventList.size()*dateScore);
+        MyAndroidHelper.writeToFile("score", gson.toJson(MainScreenActivity.scoreTreeMap),getApplicationContext());
         MyAndroidHelper.writeToFile("config", gson.toJson(appConfig),getApplicationContext());
         Log.i("myconfig",gson.toJson(appConfig));
         MainScreenActivity.appConfig = appConfig;

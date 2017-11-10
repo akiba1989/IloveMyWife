@@ -2,6 +2,7 @@ package com.bone7.ilovemywife;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.bone7.ilovemywife.notification.NotificationHelper;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.InterstitialAd;
@@ -23,7 +24,9 @@ import android.widget.Toast;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 import java.util.concurrent.TimeUnit;
 
 import mehdi.sakout.fancybuttons.FancyButton;
@@ -39,10 +42,11 @@ public class MainScreenActivity extends AppCompatActivity {
     private InterstitialAd mInterstitialAd;
     public static String myConfig="";
     public static MyConfigClass appConfig;
+    public static TreeMap<String, Integer> scoreTreeMap = new TreeMap<>();
     Intent intent;
     Gson gson = new Gson();
-    TextView txtTip;
-//    private TextView mLevelTextView;
+    TextView txtTip, txtScore, txtDes, txtTitle;
+//    String listTitle[], listDes[];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,11 +69,17 @@ public class MainScreenActivity extends AppCompatActivity {
 //        setContentView(R.layout.activity_main_screen);
         setContentView(R.layout.new_main_layout_2);
 
+        NotificationHelper.scheduleRepeatingRTCNotification(getApplicationContext(), "11", "15");
+        NotificationHelper.enableBootReceiver(getApplicationContext());
 
-        // Create the next level button, which tries to show an interstitial when clicked.
-//        btnCalendar = ((Button) findViewById(R.id.next_level_button));
+//        listDes = getResources().getStringArray(R.array.level_des);
+//        listTitle = getResources().getStringArray(R.array.level_title);
+        txtScore = (TextView)findViewById(R.id.txtScore);
+        txtDes = (TextView)findViewById(R.id.txtDes);
+        txtTitle = (TextView) findViewById(R.id.txtTitle);
+
         btnCalendar = ((FancyButton) findViewById(R.id.btnCalendar));
-//        btnCalendar.setEnabled(false);
+
         btnCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,7 +94,7 @@ public class MainScreenActivity extends AppCompatActivity {
                 intent = new Intent(getApplicationContext(), SettingScreenActivity.class);
 //                intent.putExtra("config",myConfig);
                 intent.putExtra("config",gson.toJson(appConfig));
-                showInterstitial();
+                startActivity(intent);
             }
         });
         btnViewAllTips = (FancyButton) findViewById(R.id.btnViewTips);
@@ -175,6 +185,55 @@ public class MainScreenActivity extends AppCompatActivity {
         }
         else
             txtTip.setOnClickListener(null);
+
+        // Load scores
+        String scoreJson =  MyAndroidHelper.readFromFile("score",getApplicationContext());
+        Type listType = new TypeToken<TreeMap<String, Integer>>(){}.getType();
+        if(scoreJson.length() > 0)
+        {
+            scoreTreeMap = (TreeMap<String,Integer>) gson.fromJson(scoreJson, listType);
+            refreshScore();
+        }else
+        {
+            scoreTreeMap.put("setting",0);
+            MyAndroidHelper.writeToFile("score", gson.toJson(scoreTreeMap),getApplicationContext());
+            txtScore.setText("0");
+        }
+    }
+    public void refreshScore()
+    {
+        int score = 0;
+        for (Map.Entry<String, Integer> entry : scoreTreeMap.entrySet())
+        {
+            score+= entry.getValue();
+        }
+        txtScore.setText(score);
+        Random random = new Random();
+        if(score <20)
+        {
+            txtTitle.setText("Beginner");
+            txtDes.setText("Relax, you are doing fine!");
+        }else if(score < 50)
+        {
+            txtTitle.setText("Casual amateur");
+            txtDes.setText("Go on, you can do it!");
+        }else if(score < 100)
+        {
+            txtTitle.setText("Intermediate amateur");
+            txtDes.setText("Don't worry too much!");
+        }else if(score < 180)
+        {
+            txtTitle.setText("Advanced amateur");
+            txtDes.setText("Hang in there!");
+        }else if(score < 300)
+        {
+            txtTitle.setText("Professional");
+            txtDes.setText("Keep up the great work!");
+        }else
+        {
+            txtTitle.setText("Casual amateur");
+            txtDes.setText("You are awesome!");
+        }
     }
     public void fetchNextEvent()
     {
@@ -299,6 +358,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
         super.onResume();
         fetchNextEvent();
+        refreshScore();
 //        myConfig = MyAndroidHelper.readFromFile("config", getApplicationContext());
 //        Log.i("myconfigMain",myConfig);
 

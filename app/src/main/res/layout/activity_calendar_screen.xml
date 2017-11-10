@@ -8,27 +8,39 @@
     tools:context="com.bone7.ilovemywife.CalendarScreenActivity">
     <com.kelin.calendarlistview.library.CalendarListView
         android:id="@+id/calendar_listview"
-        android:layout_above="@+id/btnAddNewAction"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteY="8dp"
         tools:layout_editor_absoluteX="8dp">
     </com.kelin.calendarlistview.library.CalendarListView>
-    <mehdi.sakout.fancybuttons.FancyButton
-        android:id="@+id/btnAddNewAction"
-        android:layout_width="match_parent"
+    <!--<mehdi.sakout.fancybuttons.FancyButton-->
+        <!--android:id="@+id/btnAddNewAction"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:text="Add new action"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_marginLeft="10dp"-->
+        <!--android:layout_marginRight="10dp"-->
+        <!--android:layout_marginTop="5dp"-->
+        <!--android:layout_marginBottom="5dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--fancy:fb_defaultColor="#3b5998"-->
+        <!--fancy:fb_focusColor="#5474b8"-->
+        <!--fancy:fb_radius="5dp"-->
+        <!--/>-->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@mipmap/ic_plus_white_24dp"
         android:layout_alignParentBottom="true"
-        android:text="Add new action"
-        android:layout_weight="1"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:layout_gravity="center"
-        fancy:fb_defaultColor="#3b5998"
-        fancy:fb_focusColor="#5474b8"
-        fancy:fb_radius="5dp"
+        android:layout_alignParentRight="true"
+        app:elevation="4dp"
+        app:fabSize="mini"
         />
 
 </RelativeLayout>

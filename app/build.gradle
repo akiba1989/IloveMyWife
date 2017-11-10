@@ -36,6 +36,7 @@ dependencies {
     compile 'com.kila.apprater_dialog.lars:apprater-dialog:1.2.1'
     compile 'org.apmem.tools:layouts:1.10@aar'
     compile 'com.android.support:appcompat-v7:26.0.1'
+    compile 'com.android.support:design:26.0.1'
     compile 'com.google.android.gms:play-services-ads:10.2.4'
     compile 'io.reactivex:rxandroid:1.1.0'
     compile 'com.trello:rxlifecycle:0.5.0'
