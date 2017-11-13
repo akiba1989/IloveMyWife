@@ -43,6 +43,7 @@ public class DayNewsListAdapter extends BaseCalendarListAdapter<NewsService.News
         }
 
         Calendar calendar = CalendarHelper.getCalendarByYearMonthDay(date);
+
         int day = calendar.get(Calendar.DAY_OF_MONTH);
         String dayStr = String.valueOf(calendar.get(Calendar.DAY_OF_MONTH));
         if (day < 10) {
@@ -50,11 +51,27 @@ public class DayNewsListAdapter extends BaseCalendarListAdapter<NewsService.News
         }
         headerViewHolder.dayText.setText(dayStr);
         headerViewHolder.yearMonthText.setText(CalendarScreenActivity.YEAR_MONTH_FORMAT.format(calendar.getTime()));
-        if(MainScreenActivity.appConfig.containDate(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime())))
+        if(MainScreenActivity.appConfig.containDate(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()))) {
             headerViewHolder.isFavImage.setImageResource(R.mipmap.ic_btn_calendar_heart_normal);
-        else
+            Calendar currentCalendar = Calendar.getInstance();
+            int diff;
+            MyConfigClass.MyEvent e = MainScreenActivity.appConfig.getEventByDate(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()));
+            if(CalendarScreenActivity.TREEMAP_FORMAT.format(currentCalendar.getTime()).compareTo(e.eventDate) > 0)
+                diff = currentCalendar.YEAR - Integer.valueOf(e.eventDate.substring(0,4));
+            else
+                diff = currentCalendar.YEAR - Integer.valueOf(e.eventDate.substring(0,4)) +1;
+            if(diff > 1)
+                headerViewHolder.eventText.setText(e.eventName+ " ("+diff+" years");
+            else
+                headerViewHolder.eventText.setText(e.eventName+ " ("+diff+" year");
+            //        headerViewHolder.eventText.setText(MainScreenActivity.appConfig.getEventName(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime())));
+        }
+        else {
             headerViewHolder.isFavImage.setImageResource(R.mipmap.ic_btn_calendar_heart_down);
-        headerViewHolder.eventText.setText(MainScreenActivity.appConfig.getEventName(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime())));
+            headerViewHolder.eventText.setText("");
+        }
+
+
         return convertView;
     }
 

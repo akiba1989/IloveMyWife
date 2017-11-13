@@ -45,6 +45,15 @@ public class MyConfigClass {
         }
         return "";
     }
+    public MyEvent getEventByDate(String date)
+    {
+        for (int i = 0;i<eventList.size();i++)
+        {
+            if(eventList.get(i).eventDate.substring(5,10).equals(date.substring(5,10)))
+                return eventList.get(i);
+        }
+        return eventList.get(0);
+    }
 
     public MyConfigClass(){
         this.notification = true;

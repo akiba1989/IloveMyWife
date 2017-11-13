@@ -11,6 +11,10 @@ import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;
 
 import com.bone7.ilovemywife.MainScreenActivity;
+import com.bone7.ilovemywife.R;
+
+import java.util.Calendar;
+import java.util.Random;
 
 
 /**
@@ -63,10 +67,29 @@ public class AlarmReceiver extends BroadcastReceiver {
         NotificationCompat.Builder builder =
                 (NotificationCompat.Builder) new NotificationCompat.Builder(context,"my_channel_01")
                 .setContentIntent(pendingIntent)
-                .setSmallIcon(android.R.drawable.arrow_up_float)
-                .setContentTitle("Morning Notification")
+                .setSmallIcon(R.mipmap.icon_512)
+                .setContentTitle(getContentTitle())
                 .setAutoCancel(true);
-
         return builder;
+    }
+    public String getContentTitle()
+    {
+        Calendar calendar = Calendar.getInstance();
+
+        if(MainScreenActivity.appConfig!=null && MainScreenActivity.appConfig.eventList.size() > 0)
+        {
+            for(int i = 0;i< MainScreenActivity.appConfig.eventList.size();i++)
+            if(calendar.DAY_OF_MONTH == Integer.valueOf(MainScreenActivity.appConfig.eventList.get(i).eventDate.substring(8,10))
+                    && calendar.MONTH == Integer.valueOf(MainScreenActivity.appConfig.eventList.get(i).eventDate.substring(5,7)))
+            {
+                return "Your anniversary is on this day next month, remember to prepare something!";
+            }
+        }
+        Random random = new Random();
+        String list[] = {"Are you creating more pleasurable interactions in your relationship?", "Remember to take time to have some fun together every day!"
+                ,"Go out on a date!", "Do you miss your lover? Let's say \"I love you\".",
+                "Did you send your lover a message today yet?", "Remember  to ask your lover daily how they're doing and if they need anything from you.",
+                "Taking a shower with your loved one is a great idea."};
+        return list[random.nextInt(list.length-1)];
     }
 }

@@ -249,10 +249,18 @@ public class MainScreenActivity extends AppCompatActivity {
             header_yearmonth1 = (TextView) findViewById(R.id.header_year_month1);
             header_event1 = (TextView) findViewById(R.id.txt_next_event1);
             Calendar calendar = Calendar.getInstance();
+            int diff;
             if (appConfig.eventList.size() == 1) {
                 header_day.setText(appConfig.eventList.get(0).eventDate.substring(8,10));
                 header_yearmonth.setText(appConfig.eventList.get(0).eventDate.substring(5,7));
-                header_event.setText(appConfig.eventList.get(0).eventName);
+                if(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).compareTo(appConfig.eventList.get(0).eventDate) > 0)
+                    diff = calendar.YEAR - Integer.valueOf(appConfig.eventList.get(0).eventDate.substring(0,4));
+                else
+                    diff = calendar.YEAR - Integer.valueOf(appConfig.eventList.get(0).eventDate.substring(0,4)) +1;
+                if(diff > 1)
+                    header_event.setText(appConfig.eventList.get(0).eventName+ " ("+diff+" years");
+                else
+                    header_event.setText(appConfig.eventList.get(0).eventName+ " ("+diff+" year");
             }
             else
             {
@@ -271,11 +279,28 @@ public class MainScreenActivity extends AppCompatActivity {
                 event2 = appConfig.eventList.get((index+1)%appConfig.eventList.size());
                 header_day.setText(event1.eventDate.substring(8,10));
                 header_yearmonth.setText(event1.eventDate.substring(5,7));
-                header_event.setText(event1.eventName);
+                if(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).compareTo(event1.eventDate) > 0)
+                    diff = calendar.YEAR - Integer.valueOf(event1.eventDate.substring(0,4));
+                else
+                    diff = calendar.YEAR - Integer.valueOf(event1.eventDate.substring(0,4)) +1;
+                if(diff > 1)
+                    header_event.setText(event1.eventName+ " ("+diff+" years");
+                else
+                    header_event.setText(event1.eventName+ " ("+diff+" year");
+//                header_event.setText(event1.eventName);
 
                 header_day1.setText(event2.eventDate.substring(8,10));
                 header_yearmonth1.setText(event2.eventDate.substring(5,7));
-                header_event1.setText(event2.eventName);
+                if(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).compareTo(event2.eventDate) > 0)
+                    diff = calendar.YEAR - Integer.valueOf(event2.eventDate.substring(0,4));
+                else
+                    diff = calendar.YEAR - Integer.valueOf
+                            (event2.eventDate.substring(0,4)) +1;
+                if(diff > 1)
+                    header_event.setText(event2.eventName+ " ("+diff+" years");
+                else
+                    header_event.setText(event2.eventName+ " ("+diff+" year");
+//                header_event1.setText(event2.eventName);
             }
         }
 
