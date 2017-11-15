@@ -8,6 +8,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v4.app.NotificationCompat;
 
 import com.bone7.ilovemywife.MainScreenActivity;
@@ -54,22 +55,29 @@ public class AlarmReceiver extends BroadcastReceiver {
         String id = "my_channel_01";
 
         int importance = NotificationManager.IMPORTANCE_DEFAULT;
-        NotificationChannel mChannel = new NotificationChannel(id, "Love Calendar Notifications", importance);
+        NotificationCompat.Builder builder;
+        if(android.os.Build.VERSION.SDK_INT > 26)
+        {
+            NotificationChannel mChannel = new NotificationChannel(id, "Love Calendar Notifications", importance);
 // Configure the notification channel.
 //        mChannel.setDescription(description);
-        mChannel.enableLights(true);
+            mChannel.enableLights(true);
 // Sets the notification light color for notifications posted to this channel, if the device supports this feature.
-        mChannel.setLightColor(Color.BLUE);
-        mChannel.enableVibration(true);
-        mChannel.setVibrationPattern(new long[]{100, 100});
-        mNotificationManager.createNotificationChannel(mChannel);
+            mChannel.setLightColor(Color.BLUE);
+            mChannel.enableVibration(true);
+            mChannel.setVibrationPattern(new long[]{100, 100});
+            mNotificationManager.createNotificationChannel(mChannel);
 
-        NotificationCompat.Builder builder =
-                (NotificationCompat.Builder) new NotificationCompat.Builder(context,"my_channel_01")
-                .setContentIntent(pendingIntent)
-                .setSmallIcon(R.mipmap.icon_512)
-                .setContentTitle(getContentTitle())
-                .setAutoCancel(true);
+        }
+        builder = (NotificationCompat.Builder) new NotificationCompat.Builder(context,"my_channel_01")
+                        .setContentIntent(pendingIntent)
+                        .setSmallIcon(R.mipmap.icon_512)
+                        .setContentTitle(getContentTitle())
+                        .setAutoCancel(true);
+
+
+
+
         return builder;
     }
     public String getContentTitle()

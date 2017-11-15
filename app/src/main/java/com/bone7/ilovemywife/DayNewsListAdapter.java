@@ -53,17 +53,18 @@ public class DayNewsListAdapter extends BaseCalendarListAdapter<NewsService.News
         headerViewHolder.yearMonthText.setText(CalendarScreenActivity.YEAR_MONTH_FORMAT.format(calendar.getTime()));
         if(MainScreenActivity.appConfig.containDate(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()))) {
             headerViewHolder.isFavImage.setImageResource(R.mipmap.ic_btn_calendar_heart_normal);
-            Calendar currentCalendar = Calendar.getInstance();
+//            Calendar currentCalendar = Calendar.getInstance();
             int diff;
             MyConfigClass.MyEvent e = MainScreenActivity.appConfig.getEventByDate(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()));
-            if(CalendarScreenActivity.TREEMAP_FORMAT.format(currentCalendar.getTime()).compareTo(e.eventDate) > 0)
-                diff = currentCalendar.YEAR - Integer.valueOf(e.eventDate.substring(0,4));
+//            if(CalendarScreenActivity.TREEMAP_FORMAT.format(currentCalendar.getTime()).compareTo(e.eventDate) > 0)
+            if(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).substring(5,10).compareTo(e.eventDate.substring(5,10)) > 0)
+                diff = calendar.get(Calendar.YEAR) - Integer.valueOf(e.eventDate.substring(0,4))+1;
             else
-                diff = currentCalendar.YEAR - Integer.valueOf(e.eventDate.substring(0,4)) +1;
+                diff = calendar.get(Calendar.YEAR) - Integer.valueOf(e.eventDate.substring(0,4));
             if(diff > 1)
-                headerViewHolder.eventText.setText(e.eventName+ " ("+diff+" years");
+                headerViewHolder.eventText.setText(e.eventName+ " ("+diff+" years)");
             else
-                headerViewHolder.eventText.setText(e.eventName+ " ("+diff+" year");
+                headerViewHolder.eventText.setText(e.eventName+ " ("+diff+" year)");
             //        headerViewHolder.eventText.setText(MainScreenActivity.appConfig.getEventName(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime())));
         }
         else {

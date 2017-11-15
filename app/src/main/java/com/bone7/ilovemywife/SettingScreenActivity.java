@@ -78,7 +78,7 @@ public class SettingScreenActivity extends AppCompatActivity {
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 appConfig.notification = b;
                 if (b) {
-                    NotificationHelper.scheduleRepeatingRTCNotification(getApplicationContext(), "11", "15");
+                    NotificationHelper.scheduleRepeatingRTCNotification(getApplicationContext(), "21", "00");
                     NotificationHelper.enableBootReceiver(getApplicationContext());
                 } else {
                     NotificationHelper.cancelAlarmRTC();
