@@ -98,7 +98,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         String list[] = {"Are you creating more pleasurable interactions in your relationship?", "Remember to take time to have some fun together every day!"
                 ,"Remember to go out on a date with your lover!", "Do you miss your lover? Let's say \"I love you\".",
                 "Did you send your lover a message today yet?", "Remember  to ask your lover daily how they're doing and if they need anything from you.",
-                "Taking a shower with your loved one is always a great idea."};
+                "Taking a shower with your loved one is always a great idea.", "You should spend Time Together On a Regular Basis"};
         return list[random.nextInt(list.length-1)];
     }
 }
