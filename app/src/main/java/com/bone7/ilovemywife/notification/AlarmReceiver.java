@@ -71,7 +71,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         }
         builder = (NotificationCompat.Builder) new NotificationCompat.Builder(context,"my_channel_01")
                         .setContentIntent(pendingIntent)
-                        .setSmallIcon(R.mipmap.icon_512)
+                        .setSmallIcon(R.mipmap.ic_notification)
                         .setContentTitle(getContentTitle())
                         .setAutoCancel(true);
 
@@ -87,17 +87,18 @@ public class AlarmReceiver extends BroadcastReceiver {
         if(MainScreenActivity.appConfig!=null && MainScreenActivity.appConfig.eventList.size() > 0)
         {
             for(int i = 0;i< MainScreenActivity.appConfig.eventList.size();i++)
-            if(calendar.DAY_OF_MONTH == Integer.valueOf(MainScreenActivity.appConfig.eventList.get(i).eventDate.substring(8,10))
-                    && calendar.MONTH == Integer.valueOf(MainScreenActivity.appConfig.eventList.get(i).eventDate.substring(5,7)))
+            if(calendar.get(Calendar.DAY_OF_MONTH) == Integer.valueOf(MainScreenActivity.appConfig.eventList.get(i).eventDate.substring(8,10))
+                    && (calendar.get(Calendar.MONTH) == Integer.valueOf(MainScreenActivity.appConfig.eventList.get(i).eventDate.substring(5,7))-1
+                    || calendar.get(Calendar.MONTH) == Integer.valueOf(MainScreenActivity.appConfig.eventList.get(i).eventDate.substring(5,7))+11) )
             {
                 return "Your anniversary is on this day next month, remember to prepare something!";
             }
         }
         Random random = new Random();
         String list[] = {"Are you creating more pleasurable interactions in your relationship?", "Remember to take time to have some fun together every day!"
-                ,"Go out on a date!", "Do you miss your lover? Let's say \"I love you\".",
+                ,"Remember to go out on a date with your lover!", "Do you miss your lover? Let's say \"I love you\".",
                 "Did you send your lover a message today yet?", "Remember  to ask your lover daily how they're doing and if they need anything from you.",
-                "Taking a shower with your loved one is a great idea."};
+                "Taking a shower with your loved one is always a great idea."};
         return list[random.nextInt(list.length-1)];
     }
 }

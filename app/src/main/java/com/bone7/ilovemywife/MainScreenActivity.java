@@ -36,8 +36,7 @@ public class MainScreenActivity extends AppCompatActivity {
     private static final String TOAST_TEXT = "Test ads are being shown. "
             + "To show live ads, replace the ad unit ID in res/values/strings.xml with your own ad unit ID.";
 
-    private static final int START_LEVEL = 1;
-    private int mLevel;
+
     private FancyButton btnCalendar, btnSetting, btnViewAllTips, btnAbout;
     private InterstitialAd mInterstitialAd;
     public static String myConfig="";
@@ -216,15 +215,15 @@ public class MainScreenActivity extends AppCompatActivity {
             txtDes.setText("Relax, you are doing fine!");
         }else if(score < 50)
         {
-            txtTitle.setText("Casual amateur");
+            txtTitle.setText("Casual");
             txtDes.setText("Go on, you can do it!");
         }else if(score < 100)
         {
-            txtTitle.setText("Intermediate amateur");
+            txtTitle.setText("Intermediate");
             txtDes.setText("Don't worry too much!");
         }else if(score < 180)
         {
-            txtTitle.setText("Advanced amateur");
+            txtTitle.setText("Advanced");
             txtDes.setText("Hang in there!");
         }else if(score < 300)
         {
@@ -232,7 +231,7 @@ public class MainScreenActivity extends AppCompatActivity {
             txtDes.setText("Keep up the great work!");
         }else
         {
-            txtTitle.setText("Casual amateur");
+            txtTitle.setText("Master");
             txtDes.setText("You are awesome!");
         }
     }
@@ -253,7 +252,7 @@ public class MainScreenActivity extends AppCompatActivity {
             int diff;
             if (appConfig.eventList.size() == 1) {
                 header_day.setText(appConfig.eventList.get(0).eventDate.substring(8,10));
-                header_yearmonth.setText(appConfig.eventList.get(0).eventDate.substring(5,7));
+                header_yearmonth.setText(MyAndroidHelper.getMonthName(appConfig.eventList.get(0).eventDate.substring(5,7)));
                 Log.i("date1", String.valueOf(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).substring(5,10).compareTo(appConfig.eventList.get(0).eventDate.substring(5,10))));
                 if(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).substring(5,10).compareTo(appConfig.eventList.get(0).eventDate.substring(5,10)) > 0)
 //                if(calendar.get(Calendar.MONTH) > Integer.valueOf(appConfig.eventList.get(0).eventDate.substring(5,7))  || (calendar.get(Calendar.MONTH) == Integer.valueOf(appConfig.eventList.get(0).eventDate.substring(5,7))
@@ -282,7 +281,7 @@ public class MainScreenActivity extends AppCompatActivity {
                 event1 = appConfig.eventList.get(index);
                 event2 = appConfig.eventList.get((index+1)%appConfig.eventList.size());
                 header_day.setText(event1.eventDate.substring(8,10));
-                header_yearmonth.setText(event1.eventDate.substring(5,7));
+                header_yearmonth.setText(MyAndroidHelper.getMonthName(event1.eventDate.substring(5,7)));
                 Log.i("date1", String.valueOf(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).substring(5,10) + "-"+(event1.eventDate.substring(5,10))));
 //                if(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).compareTo(event1.eventDate) > 0)
                 if(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).substring(5,10).compareTo(event1.eventDate.substring(5,10)) > 0)
@@ -297,7 +296,7 @@ public class MainScreenActivity extends AppCompatActivity {
 //                header_event.setText(event1.eventName);
 
                 header_day1.setText(event2.eventDate.substring(8,10));
-                header_yearmonth1.setText(event2.eventDate.substring(5,7));
+                header_yearmonth1.setText(MyAndroidHelper.getMonthName(event2.eventDate.substring(5,7)));
 //                if(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).compareTo(event2.eventDate) > 0)
                 if(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).substring(5,10).compareTo(event2.eventDate.substring(5,10)) > 0)
                     diff = calendar.get(Calendar.YEAR) - Integer.valueOf(event2.eventDate.substring(0,4))+1;
