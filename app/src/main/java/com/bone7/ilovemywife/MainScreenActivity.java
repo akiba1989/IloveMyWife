@@ -13,13 +13,16 @@ import com.kila.apprater_dialog.lars.AppRater;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+//import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+//import org.w3c.dom.Text;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -44,7 +47,8 @@ public class MainScreenActivity extends AppCompatActivity {
     public static TreeMap<String, Integer> scoreTreeMap = new TreeMap<>();
     Intent intent;
     Gson gson = new Gson();
-    TextView txtTip, txtScore, txtDes, txtTitle;
+    TextView txtTip, txtScore, txtDes, txtTitle, txtCurrentMonth, txtCurrentDay;
+    Calendar calendar = Calendar.getInstance();
 //    String listTitle[], listDes[];
 
     @Override
@@ -70,12 +74,19 @@ public class MainScreenActivity extends AppCompatActivity {
 
         NotificationHelper.scheduleRepeatingRTCNotification(getApplicationContext(), "11", "15");
         NotificationHelper.enableBootReceiver(getApplicationContext());
+        getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setCustomView(R.layout.actionbar_main_screen);
 
 //        listDes = getResources().getStringArray(R.array.level_des);
 //        listTitle = getResources().getStringArray(R.array.level_title);
         txtScore = (TextView)findViewById(R.id.txtScore);
         txtDes = (TextView)findViewById(R.id.txtDes);
         txtTitle = (TextView) findViewById(R.id.txtTitle);
+        txtCurrentDay = (TextView) findViewById(R.id.txtCurrentDay);
+        txtCurrentMonth = (TextView) findViewById(R.id.txtCurrentMonth);
+
+        txtCurrentDay.setText(calendar.get(Calendar.DAY_OF_MONTH));
+        txtCurrentMonth.setText(MyAndroidHelper.getMonthName(calendar.get(Calendar.MONTH)));
 
         btnCalendar = ((FancyButton) findViewById(R.id.btnCalendar));
 
@@ -147,7 +158,7 @@ public class MainScreenActivity extends AppCompatActivity {
             Type listType = new TypeToken<MyConfigClass>(){}.getType();
             appConfig = (MyConfigClass) gson.fromJson(myConfig, listType);
         }
-        Log.i("myconfig", myConfig);
+//        Log.i("myconfig", myConfig);
         // Fetch next event
         fetchNextEvent();
 
@@ -237,7 +248,6 @@ public class MainScreenActivity extends AppCompatActivity {
     }
     public void fetchNextEvent()
     {
-
         if(appConfig==null || appConfig.eventList.size() == 0)
             return;
         else {
@@ -248,12 +258,11 @@ public class MainScreenActivity extends AppCompatActivity {
             header_day1 = (TextView) findViewById(R.id.header_day1);
             header_yearmonth1 = (TextView) findViewById(R.id.header_year_month1);
             header_event1 = (TextView) findViewById(R.id.txt_next_event1);
-            Calendar calendar = Calendar.getInstance();
             int diff;
             if (appConfig.eventList.size() == 1) {
                 header_day.setText(appConfig.eventList.get(0).eventDate.substring(8,10));
                 header_yearmonth.setText(MyAndroidHelper.getMonthName(appConfig.eventList.get(0).eventDate.substring(5,7)));
-                Log.i("date1", String.valueOf(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).substring(5,10).compareTo(appConfig.eventList.get(0).eventDate.substring(5,10))));
+//                Log.i("date1", String.valueOf(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).substring(5,10).compareTo(appConfig.eventList.get(0).eventDate.substring(5,10))));
                 if(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).substring(5,10).compareTo(appConfig.eventList.get(0).eventDate.substring(5,10)) > 0)
 //                if(calendar.get(Calendar.MONTH) > Integer.valueOf(appConfig.eventList.get(0).eventDate.substring(5,7))  || (calendar.get(Calendar.MONTH) == Integer.valueOf(appConfig.eventList.get(0).eventDate.substring(5,7))
 //                        && calendar.get(Calendar.DAY_OF_MONTH) > Integer.valueOf(appConfig.eventList.get(0).eventDate.substring(8,10)) ))
@@ -282,7 +291,7 @@ public class MainScreenActivity extends AppCompatActivity {
                 event2 = appConfig.eventList.get((index+1)%appConfig.eventList.size());
                 header_day.setText(event1.eventDate.substring(8,10));
                 header_yearmonth.setText(MyAndroidHelper.getMonthName(event1.eventDate.substring(5,7)));
-                Log.i("date1", String.valueOf(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).substring(5,10) + "-"+(event1.eventDate.substring(5,10))));
+//                Log.i("date1", String.valueOf(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).substring(5,10) + "-"+(event1.eventDate.substring(5,10))));
 //                if(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).compareTo(event1.eventDate) > 0)
                 if(CalendarScreenActivity.TREEMAP_FORMAT.format(calendar.getTime()).substring(5,10).compareTo(event1.eventDate.substring(5,10)) > 0)
 //

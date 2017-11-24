@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
-import android.util.Log;
+//import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -154,12 +154,12 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
 //                dayNewsListAdapter.notifyDataSetChanged();
 //                calendarItemAdapter.notifyDataSetChanged();
                 Toast.makeText(getApplicationContext(),"ListItem clicked",Toast.LENGTH_SHORT);
-                Log.i("test1", "Itemclicked!");
+//                Log.i("test1", "Itemclicked!");
             }
 
             @Override
             public void onSectionClick(AdapterView<?> adapterView, View view, int section, long id) {
-                Log.i("test1", "ISectrionlicked!");
+//                Log.i("test1", "ISectrionlicked!");
             }
         });
 
@@ -216,13 +216,13 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
         calendarListView.setOnCalendarViewItemClickListener(new CalendarListView.OnCalendarViewItemClickListener() {
             @Override
             public void onDateSelected(View View, String selectedDate, int listSection, SelectedDateRegion selectedDateRegion) {
-                Log.i("test1",selectedDate);
+//                Log.i("test1",selectedDate);
                 saveScore();
                 MyAndroidHelper.writeToFile(selectedDate.substring(0,7), gson.toJson(listTreeMap),getApplicationContext());
 //                Calendar calendar = getCalendarByYearMonthDay(selectedDate);
                 loadDayList(selectedDate);
 //                String tremp = MyAndroidHelper.readFromFile(selectedDate.substring(0,7),getApplicationContext());
-                Log.i("test3", selectedDate.substring(0,7));
+//                Log.i("test3", selectedDate.substring(0,7));
             }
         });
 
@@ -349,7 +349,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
         String json =  MyAndroidHelper.readFromFile(date,getApplicationContext());
         if(json.length() > 0)
             listTreeMap = (TreeMap<String, List<NewsService.News.StoriesBean>>) gson.fromJson(json, listType);
-        Log.i("test5",date);
+//        Log.i("test5",date);
 
     }
     private void loadDayList(String date) {
@@ -418,7 +418,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
                                                     newCount++;
                                             }
                                             customCalendarItemModel.setNewsCount(newCount);
-                                            Log.i("test3",d.substring(5,10));
+//                                            Log.i("test3",d.substring(5,10));
                                             if(MainScreenActivity.appConfig.containDate(d)) {
                                                 customCalendarItemModel.setHoliday(true);
                                                 customCalendarItemModel.setFav(true);
@@ -444,7 +444,7 @@ public class CalendarScreenActivity extends RxAppCompatActivity {
                                     {
                                         if(event.eventDate.substring(5,7).equals(date.substring(5,7)))
                                         {
-                                            Log.i("date1", date+event.eventDate.substring(7,10));
+//                                            Log.i("date1", date+event.eventDate.substring(7,10));
                                             CustomCalendarItemModel itemModel = calendarItemAdapter.getDayModelList().get(date+event.eventDate.substring(7,10));
                                             if(itemModel != null)
                                             {

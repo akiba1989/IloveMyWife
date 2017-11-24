@@ -44,7 +44,7 @@ public class LoadingFooter {
         Random RAND = new Random();
         String[] values = context.getResources().getStringArray(R.array.tips_array);
         String nextValue = values[RAND.nextInt(values.length)];
-        mLoadingText.setText(nextValue);
+//        mLoadingText.setText(nextValue);
     }
 
     protected void init(String noMoreDataMessage, int loadingTextColor) {
