@@ -39,8 +39,9 @@
         android:src="@mipmap/ic_plus_white_24dp"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        app:elevation="4dp"
-        app:fabSize="mini"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        app:borderWidth="0dp"
         />
 
 </RelativeLayout>
